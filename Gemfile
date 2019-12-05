@@ -41,6 +41,15 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
+group :test do
+  #rspec
+  gem 'rspec-rails', '~> 3.9'
+  
+  # factory bot
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
+end
+
 group :development do
   gem "rubocop", ">= 0.47", require: false
   gem "rubocop-performance", require: false
