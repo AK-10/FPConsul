@@ -1,5 +1,5 @@
 class Planner < ApplicationRecord
-  include Regex
+  include ValidFormat
 
   has_secure_password
 
