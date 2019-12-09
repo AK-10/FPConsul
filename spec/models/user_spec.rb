@@ -2,22 +2,20 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
-    context 'name' do
-      it { should validate_presence_of(:name) }
-      it { should validate_length_of(:name).is_at_most(50) }
-    end
+    it { is_expected.to validate_presence_of(:name).allow_nil }
+    it { is_expected.to validate_length_of(:name).is_at_most(50) }
     
-    context 'email' do
-      it { should validate_presence_of(:email) }
-      it { should validate_length_of(:email).is_at_most(100) }
-      it { should validate_uniqueness_of(:email) }
-      
-      it { should allow_value('test@test.com').for(:email) }
-      it { should_not allow_value('abcdefg').for(:email) }
-    end
+    it { is_expected.to validate_presence_of(:email).allow_nil }
+    it { is_expected.to validate_length_of(:email).is_at_most(100) }
     
-    context 'password' do
-      it { should have_secure_password }
+    it { is_expected.to allow_value('test@test.com').for(:email) }
+    it { is_expected.not_to allow_value('abcdefg').for(:email) }     
+    
+    it { is_expected.to have_secure_password }
+    
+    context 'email uniqueness validation' do
+      before { create(:user) }
+      it { is_expected.to validate_uniqueness_of(:email) }
     end
   end
 end
