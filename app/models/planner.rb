@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Planner < ApplicationRecord
-  include ValidFormat
 
   has_secure_password
 
