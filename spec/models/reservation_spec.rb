@@ -18,14 +18,14 @@ RSpec.describe Reservation, type: :model do
     context 'scheduled_at validation' do
       let(:valid_time) { '2019-12-12 12:30:00'.to_time }
       let(:invalid_time) { '2019-12-12 20:30:00'.to_time }
-      let(:invalid_minuite) { '2019-12-12 14:12:00'.to_time }
+      let(:invalid_minute) { '2019-12-12 14:12:00'.to_time }
       let(:invalid_time_on_saturday) { '2019-12-14 17:00:00'.to_time }
       let(:sunday) { '2019-12-15 10:30:00'.to_time }
       let(:past) { '2018-12-15 10:30:00'.to_time }
       
       it { is_expected.to allow_value(valid_time).for(:scheduled_at) }
       it { is_expected.not_to allow_value(invalid_time).for(:scheduled_at) }
-      it { is_expected.not_to allow_value(invalid_minuite).for(:scheduled_at) }
+      it { is_expected.not_to allow_value(invalid_minute).for(:scheduled_at) }
       it { is_expected.not_to allow_value(invalid_time_on_saturday).for(:scheduled_at) }
       it { is_expected.not_to allow_value(sunday).for(:scheduled_at) }
       it { is_expected.not_to allow_value(past).for(:scheduled_at) }
