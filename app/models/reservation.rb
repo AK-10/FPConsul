@@ -12,6 +12,7 @@ class Reservation < ApplicationRecord
 
   def validate_scheduled_at
     minuite = scheduled_at.min
+
     errors.add(:scheduled_at, "can't be except 0, 30") if minuite % 30 != 0
 
     start_time = scheduled_at.change(hour: 10, min: 0)
