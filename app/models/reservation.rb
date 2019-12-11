@@ -29,6 +29,6 @@ class Reservation < ApplicationRecord
 
     errors.add(:scheduled_at, "can't be sunday") if scheduled_at.sunday?
 
-    errors.add(:scheduled_at, "can't be past") if schedlued_at.past?
+    errors.add(:scheduled_at, "can't be past") if scheduled_at.past?
   end
 end
