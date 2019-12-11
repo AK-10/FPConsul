@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
   describe 'validations' do
-    subject { build(:reservation) }
+    subject { build(:reservation, scheduled_at: '2019-12-11 17:30:00') }
+
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:planner) }
 
