@@ -15,6 +15,8 @@ RSpec.describe Planner, type: :model do
 
     it { is_expected.to have_secure_password }
 
+    it { is_expected.to have_many(:reservations) }
+
     context 'email uniqueness validation' do
       before { create(:planner) }
       it { is_expected.to validate_uniqueness_of(:email) }
