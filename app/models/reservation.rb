@@ -6,16 +6,16 @@ class Reservation < ApplicationRecord
 
   validates :description, length: { maximum: 200 }
   validates :scheduled_at, presence: true
-  validate :validate_scheduled_at, if: :scheduled_at
 
+  with_options if: :scheduled_at do
+    validate :validate_time_range
+    validate :validate_time_range_on_saturday
+    validate :validate_minutes
+    validate :validate_sunday
+    validate :validate_past
+  end
+  
   private
-    def validate_scheduled_at
-      validate_time_range
-      validate_time_range_on_saturday
-      validate_minutes
-      validate_sunday
-      validate_past
-    end
 
     def validate_time_range
       start_time = scheduled_at.change(hour: 10, min: 0)
