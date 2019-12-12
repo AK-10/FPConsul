@@ -10,9 +10,6 @@ RSpec.describe Reservation, type: :model do
 
     subject { build(:reservation, scheduled_at: "2019-12-12 13:30:00".to_time) }
 
-    it { is_expected.to belong_to(:user) }
-    it { is_expected.to belong_to(:planner) }
-
     it { is_expected.to validate_presence_of(:scheduled_at) }
     it { is_expected.to validate_length_of(:description).is_at_most(200) }
 
@@ -31,5 +28,10 @@ RSpec.describe Reservation, type: :model do
       it { is_expected.not_to allow_value(sunday).for(:scheduled_at) }
       it { is_expected.not_to allow_value(past).for(:scheduled_at) }
     end
+  end
+
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:planner) }
   end
 end

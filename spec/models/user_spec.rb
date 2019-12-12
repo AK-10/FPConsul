@@ -15,11 +15,13 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to have_secure_password }
 
-    it { is_expected.to have_many(:reservations) }
-
     context 'email uniqueness validation' do
       before { create(:user) }
       it { is_expected.to validate_uniqueness_of(:email) }
     end
+  end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:reservations) }
   end
 end
