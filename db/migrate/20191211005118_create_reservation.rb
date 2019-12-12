@@ -5,7 +5,7 @@ class CreateReservation < ActiveRecord::Migration[5.2]
       t.references :planner, foreign_key: true
       t.string :description, limit: 200
 
-      t.datetime :scheduled_at, null: false
+      t.datetime :scheduled_at, null: false, comment: "予約枠の開始時間"
 
       t.timestamps
 
