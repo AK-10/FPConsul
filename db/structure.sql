@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `available_frames`;
 CREATE TABLE `available_frames` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `planner_id` bigint(20) DEFAULT NULL,
-  `scheduled_time` datetime NOT NULL COMMENT '予約可能な日時と開始時間',
+  `scheduled_time` datetime NOT NULL COMMENT '予約可能な日時(開始時間)',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
