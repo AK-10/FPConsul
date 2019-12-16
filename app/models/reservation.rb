@@ -28,8 +28,9 @@ class Reservation < ApplicationRecord
     def validate_time_range_on_saturday
       start_time = scheduled_at.change(hour: 11, min: 0)
       end_time = scheduled_at.change(hour: 14, min: 30)
-      is_invalid = scheduled_at.saturday? && !scheduled_at.between?(start_time, end_time)
-      return unless is_invalid
+      
+      return unless scheduled_at.saturday?
+      return if scheduled_at.between?(start_time, end_time)
 
       errors.add(:scheduled_at, "can't be except 11:00 - 15:00 on saturday")
     end
