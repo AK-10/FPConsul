@@ -20,6 +20,21 @@ CREATE TABLE `ar_internal_metadata` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `avaliable_frames`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `avaliable_frames` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `planner_id` bigint(20) DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL COMMENT '予約可能な日時と開始時間',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_avaliable_frames_on_planner_id_and_date_time` (`planner_id`,`date_time`),
+  KEY `index_avaliable_frames_on_planner_id` (`planner_id`),
+  CONSTRAINT `fk_rails_bc07df46bf` FOREIGN KEY (`planner_id`) REFERENCES `planners` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `planners`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -30,6 +45,25 @@ CREATE TABLE `planners` (
   `password_digest` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_planners_on_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `reservations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservations` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
+  `planner_id` bigint(20) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `scheduled_at` datetime NOT NULL COMMENT '予約枠の開始時間',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_reservations_on_planner_id_and_scheduled_at` (`planner_id`,`scheduled_at`),
+  KEY `index_reservations_on_user_id` (`user_id`),
+  KEY `index_reservations_on_planner_id` (`planner_id`),
+  CONSTRAINT `fk_rails_2e7a5301f5` FOREIGN KEY (`planner_id`) REFERENCES `planners` (`id`),
+  CONSTRAINT `fk_rails_48a92fce51` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `schema_migrations`;
@@ -66,6 +100,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `schema_migrations` (version) VALUES
 ('20191205005516'),
-('20191209063922');
+('20191209063922'),
+('20191211005118'),
+('20191216023929');
 
 
