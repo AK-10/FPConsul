@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-# sheduled_timeだけを切り出したモデルを作成
+# scheduled_timeだけを切り出したモデルを作成
 module TestModel
   ScheduledTimeValidatable = Struct.new(:scheduled_time) do
     include ActiveModel::Validations
