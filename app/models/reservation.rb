@@ -6,6 +6,7 @@ class Reservation < ApplicationRecord
   validates :user, presence: true
   validates :scheduled_time, presence: true
   validates :scheduled_time, scheduled_time: true, if: :scheduled_time
+  validate :validate_available_frame_exists, if: [:planner, :scheduled_time]
   validates :planner_id, uniqueness: { scope: [:scheduled_time] }
 
   private
