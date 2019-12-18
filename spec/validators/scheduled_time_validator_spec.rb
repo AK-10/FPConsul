@@ -15,63 +15,56 @@ RSpec.describe ScheduledTimeValidator, type: :validator do
     travel_to("2019-12-18 12:00:00") { e.run }
   end
 
-  subject { TestModel::ScheduledTimeValidatable.new }
+  subject { validatable.valid? }
+  let(:validatable) { TestModel::ScheduledTimeValidatable.new(scheduled_time) }
 
   context 'time range on weekdays' do
-    it 'is valid time' do
-      subject.scheduled_time = '2019-12-18 12:30:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).not_to match_array "can't be except 10:00 - 18:00"
+    context 'in range' do
+      let(:scheduled_time) { '2019-12-18 12:30:00'.to_time }
+      it { expect { subject }.not_to change { validatable.errors[:scheduled_time] } }
     end
 
-    it 'is invalid time' do
-      subject.scheduled_time = '2019-12-18 18:30:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).to match_array "can't be except 10:00 - 18:00"
+    context 'out of range' do
+      let(:scheduled_time) { '2019-12-18 18:30:00'.to_time }
+      it { expect { subject }.to change { validatable.errors[:scheduled_time] }.from([]).to(["can't be except 10:00 - 18:00"]) }
     end
   end
   
   context 'time range on saturday' do
-    it 'is valid time' do
-      subject.scheduled_time = '2019-12-21 12:00:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).not_to match_array "can't be except 11:00 - 15:00 on saturday"
+    context 'in range' do
+      let(:scheduled_time) { '2019-12-21 12:00:00'.to_time }
+      it { expect { subject }.not_to change { validatable.errors[:scheduled_time] } }
     end
 
-    it 'invalid time' do
-      subject.scheduled_time = '2019-12-21 16:00:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).to match_array "can't be except 11:00 - 15:00 on saturday"
+    context 'out of range' do
+      let(:scheduled_time) { '2019-12-21 16:00:00'.to_time }
+      it { expect { subject }.to change { validatable.errors[:scheduled_time] }.from([]).to(["can't be except 11:00 - 15:00 on saturday"]) }
     end
   end
 
   context 'minutes' do
-    it 'valid minutes' do
-      subject.scheduled_time = '2019-12-18 12:30:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).not_to match_array "can't be except 0 or 30 minutes"
+    context 'valid minutes' do
+      let(:scheduled_time) { '2019-12-18 12:30:00'.to_time }
+      it { expect { subject }.not_to change { validatable.errors[:scheduled_time] } }
     end
 
-    it 'invalid minutes' do
-      subject.scheduled_time = '2019-12-18 12:35:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).to match_array "can't be except 0 or 30 minutes"
+    context 'invalid minutes' do
+      let(:scheduled_time) { '2019-12-18 12:35:00'.to_time }
+      it { expect { subject }.to change { validatable.errors[:scheduled_time] }.from([]).to(["can't be except 0 or 30 minutes"]) }
     end
   end
 
   context 'on sunday' do
-    it 'is invalid date' do
-      subject.scheduled_time = '2019-12-22 16:00:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).to match_array "can't be sunday"
+    context 'is invalid date' do
+      let(:scheduled_time) { '2019-12-22 16:00:00'.to_time }
+      it { expect { subject }.to change { validatable.errors[:scheduled_time] }.from([]).to(["can't be sunday"]) }
     end
   end
 
   context 'on past' do
-    it 'is invalid date' do
-      subject.scheduled_time = '2019-12-17 16:00:00'.to_time
-      subject.valid?
-      expect(subject.errors[:scheduled_time]).to match_array "can't be past"
+    context 'is invalid date' do
+      let(:scheduled_time) { '2019-12-17 16:00:00'.to_time }
+      it { expect { subject }.to change { validatable.errors[:scheduled_time] }.from([]).to(["can't be past"]) }
     end
   end
 end
