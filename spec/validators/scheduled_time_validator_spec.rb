@@ -12,7 +12,7 @@ end
 RSpec.describe ScheduledTimeValidator, type: :validator do
   
   around do |e|
-    travel_to("2019-12-18 12:00:00".to_time) { e.run }
+    travel_to("2019-12-18 12:00:00") { e.run }
   end
 
   subject { TestModel::ScheduledTimeValidatable.new }
