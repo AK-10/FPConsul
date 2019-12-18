@@ -18,13 +18,13 @@ RSpec.describe ScheduledTimeValidator, type: :validator do
   subject { validatable.valid? }
   let(:validatable) { TestModel::ScheduledTimeValidatable.new(scheduled_time) }
 
-  describe 'valid pattern' do
-    context 'on weekdays' do
+  context 'valid pattern' do
+    context 'for range of time on weekdays' do
       let(:scheduled_time) { '2019-12-18 12:30:00'.to_time }
       it { expect { subject }.not_to change { validatable.errors[:scheduled_time] } }
     end
 
-    context 'on saturday' do
+    context 'for range of time on saturday' do
       let(:scheduled_time) { '2019-12-21 12:00:00'.to_time }
       it { expect { subject }.not_to change { validatable.errors[:scheduled_time] } }
     end
@@ -35,13 +35,13 @@ RSpec.describe ScheduledTimeValidator, type: :validator do
     end
   end
 
-  describe 'invalid pattern' do
-    context 'on weekdays' do
+  context 'invalid pattern' do
+    context 'for range of time on weekdays' do
       let(:scheduled_time) { '2019-12-18 18:30:00'.to_time }
       it { expect { subject }.to change { validatable.errors[:scheduled_time] }.from([]).to(["can't be except 10:00 - 18:00"]) }
     end
 
-    context 'on saturday' do
+    context 'for range of time on saturday' do
       let(:scheduled_time) { '2019-12-21 16:00:00'.to_time }
       it { expect { subject }.to change { validatable.errors[:scheduled_time] }.from([]).to(["can't be except 11:00 - 15:00 on saturday"]) }
     end
