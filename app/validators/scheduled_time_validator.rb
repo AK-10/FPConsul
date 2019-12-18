@@ -2,6 +2,9 @@ class ScheduledTimeValidator < ActiveModel::EachValidator
   attr_reader :record, :attribute, :value
   
   def validate_each(record, attribute, value)
+    p record
+    p attribute
+    p value
     @record = record
     @attribute = attribute
     @value = value
