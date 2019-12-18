@@ -20,4 +20,8 @@ RSpec.describe Planner, type: :model do
       it { is_expected.to validate_uniqueness_of(:email) }
     end
   end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:available_frames) }
+  end
 end

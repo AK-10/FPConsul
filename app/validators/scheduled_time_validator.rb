@@ -35,7 +35,7 @@ class ScheduledTimeValidator < ActiveModel::EachValidator
 
     def validate_minutes
       minutes = value.min
-      record.errors.add(attribute, "can't be except 0, 30") if minutes % 30 != 0
+      record.errors.add(attribute, "can't be except 0 or 30 minutes") if minutes % 30 != 0
     end
 
     def validate_sunday
