@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvailableFrame < ApplicationRecord
   belongs_to :planner
 

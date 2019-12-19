@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reservation < ApplicationRecord
   belongs_to :planner
   belongs_to :user
@@ -11,6 +13,6 @@ class Reservation < ApplicationRecord
   private
     def validate_available_frame_exists
       return if planner.available_frames.where(scheduled_time: scheduled_time).exists?
-      errors.add(:scheduled_time, 'is unavailable')
+      errors.add(:scheduled_time, "is unavailable")
     end
 end

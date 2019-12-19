@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePlanner < ActiveRecord::Migration[5.2]
   def up
     create_table :planners do |t|
