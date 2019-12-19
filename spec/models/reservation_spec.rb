@@ -11,7 +11,7 @@ RSpec.describe Reservation, type: :model do
     it { is_expected.to validate_presence_of(:user) }
     it { is_expected.to validate_presence_of(:planner) }
     it { is_expected.to validate_presence_of(:scheduled_time) }
-    it { is_expected.to validate_uniqueness_of(:planner_id).scoped_to(:scheduled_time) }
+    it { is_expected.to validate_uniqueness_of(:planner).scoped_to(:scheduled_time) }
 
     describe 'available frame of planner exist validation' do
       subject { reservation.valid? }
