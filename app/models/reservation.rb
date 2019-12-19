@@ -10,9 +10,7 @@ class Reservation < ApplicationRecord
 
   private
     def validate_available_frame_exists
-      frame_exists = planner.available_frames.where(scheduled_time: scheduled_time).exists?
-      return if frame_exists
-
+      return if planner.available_frames.where(scheduled_time: scheduled_time).exists?
       errors.add(:scheduled_time, 'is unavailable')
     end
 end
