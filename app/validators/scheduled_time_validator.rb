@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ScheduledTimeValidator < ActiveModel::EachValidator
   attr_reader :record, :attribute, :value
-  
+
   START_TIME_ON_WEEKDAYS = { hour: 10, min: 0 }
   END_TIME_ON_WEEKDAYS = { hour: 17, min: 30 }
   START_TIME_ON_SATURDAY = { hour: 11, min: 0 }
@@ -19,7 +21,6 @@ class ScheduledTimeValidator < ActiveModel::EachValidator
   end
 
   private
-
     def validate_time_range
       start_time = value.change(START_TIME_ON_WEEKDAYS)
       end_time = value.change(END_TIME_ON_WEEKDAYS)
@@ -49,5 +50,5 @@ class ScheduledTimeValidator < ActiveModel::EachValidator
 
     def validate_past
       record.errors.add(attribute, "can't be past") if value.past?
-    end 
+    end
 end

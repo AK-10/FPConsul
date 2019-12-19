@@ -1,7 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe AvailableFrame, type: :model do
-  describe 'validations' do
+  describe "validations" do
     around do |e|
       travel_to("2019-12-18 12:00:00") { e.run }
     end
@@ -13,7 +15,7 @@ RSpec.describe AvailableFrame, type: :model do
     it { is_expected.to validate_uniqueness_of(:planner_id).scoped_to(:scheduled_time) }
   end
 
-  describe 'associations' do
+  describe "associations" do
     it { is_expected.to belong_to(:planner) }
   end
 end

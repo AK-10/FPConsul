@@ -254,4 +254,4 @@ Performance/ReverseEach:
   Enabled: true
 
 Performance/UnfreezeString:
-  Enabled: true/
+  Enabled: true
