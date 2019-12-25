@@ -4,7 +4,7 @@
       .card.card-body
         h2.text-center
           | アカウント登録
-        = form_with(model: @user, local: true, url: users_path) do |f|
+        = form_with(model: @user, local: true) do |f|
           = f.label :name
           = f.text_field :name, class: 'form-control'
 
