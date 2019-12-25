@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def new
   end
@@ -8,10 +10,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = 'ユーザー登録が完了しました.'
+      flash[:success] = "ユーザー登録が完了しました."
       redirect_to @user
     else
-      flash[:danger] = 'ユーザ登録に失敗しました．'
+      flash[:danger] = "ユーザ登録に失敗しました．"
       render :new
     end
   end
@@ -23,7 +25,6 @@ class UsersController < ApplicationController
   end
 
   private
-
     def user_params
       params.fetch(:user, {}).permit(
         :name,

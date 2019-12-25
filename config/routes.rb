@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   # scope :users do
   #   get 'join', to: 'users#new'
   # end
- 
-  scope(path_names: { new: 'join'}) do
+
+  scope(path_names: { new: "join" }) do
     resources :users, only: %i(new show create edit update)
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
