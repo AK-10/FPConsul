@@ -1,2 +1,16 @@
 h1 User#new
 p Find me in app/views/user/new.html.slim
+div.p-responsive.mt-4.mt-md-8
+  div.mb-4.mb-md-8.container-md
+    div.container-sm
+    = form_with(local: true, url: users_path) do |f|
+      = f.label :name
+      = f.text_field :name, class: 'form-control'
+
+      = f.label :email
+      = f.email_field :email, class: 'form-control'
+
+      = f.label :password
+      = f.password_field :password, class: 'form-control'
+
+      = f.submit 'register', class: 'btn btn-primary'
