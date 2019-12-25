@@ -1,20 +1,20 @@
 .container-fluid
   .row.mt-5
-    .col-sm-12.col-md-6.offset-md-3
+    .col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4
       .card.card-body
         h2.text-center
           | アカウント登録
-        = form_with(model: User.new, local: true, url: users_path) do |f|
+        = form_with(model: @user, local: true, url: users_path) do |f|
           = f.label :name
-          = f.text_field :name, class: 'form-control'
+          = f.text_field :name, class: 'form-control', value: @user&.name
 
           = f.label :email
-          = f.email_field :email, class: 'form-control'
+          = f.email_field :email, class: 'form-control', value: @user&.email
 
           = f.label :password
-          = f.password_field :password, class: 'form-control'
+          = f.password_field :password, class: 'form-control', value: @user&.password
 
           = f.label :password_confirmation
-          = f.password_field :password_confirmation, class: 'form-control'
+          = f.password_field :password_confirmation, class: 'form-control', value: @user&.password_confirmation
 
           = f.submit '登録', class: 'btn btn-primary btn-block mt-4'
