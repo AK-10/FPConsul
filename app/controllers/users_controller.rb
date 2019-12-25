@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   def new
+    @user = User.new
   end
 
   def show
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       flash[:danger] = "ユーザ登録に失敗しました．"
-      render :new
+      render :new, status: :bad_request
     end
   end
 
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.fetch(:user, {}).permit(
+      params.require(:user).permit(
         :name,
         :email,
         :password,
