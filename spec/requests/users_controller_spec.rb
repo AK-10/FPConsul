@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-
 RSpec.describe UsersController, type: :request do
   describe "GET /users/join" do
     it { is_expected.to eq(200) }
@@ -13,8 +12,8 @@ RSpec.describe UsersController, type: :request do
       let(:params) {
         {
           user: {
-            name: 'test2',
-            email: 'qwert@test.com',
+            name: "test2",
+            email: "qwert@test.com",
             password: "qpwoei1029",
             password_confirmation: "qpwoei1029"
           }
@@ -27,8 +26,8 @@ RSpec.describe UsersController, type: :request do
       let(:params) {
         {
           user: {
-            name: 'test2',
-            email: 'qwertterws',
+            name: "test2",
+            email: "qwertterws",
             password: "qpwoei1029",
             password_confirmation: "qpwoei1029"
           }
@@ -37,5 +36,4 @@ RSpec.describe UsersController, type: :request do
       it { is_expected.to eq(400) }
     end
   end
-
 end
