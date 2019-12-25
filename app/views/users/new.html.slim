@@ -3,7 +3,7 @@ div.container-fluid
     div.col-sm-12.col-md-6.offset-md-3
       div.card.card-body
           h2.text-center アカウント登録
-          = form_with(local: true, url: users_path) do |f|
+          = form_with(model: User.new, local: true, url: users_path) do |f|
             = f.label :name
             = f.text_field :name, class: 'form-control'
 
