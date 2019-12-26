@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 module Users
-  module SessionsHelper
+  module SessionConcerns
     def login_by_user(user)
       session[:user_id] = user.id
     end
