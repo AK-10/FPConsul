@@ -33,7 +33,7 @@ RSpec.describe UsersController, type: :request do
           }
         }
       }
-      it { is_expected.to eq(400) }
+      it { is_expected.to eq(422) }
     end
   end
 end
