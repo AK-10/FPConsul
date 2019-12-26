@@ -7,7 +7,7 @@ class Users::SessionsController < ApplicationController
     if user && user.authenticate(session_params[:password])
       redirect_to user
     else
-      render :new, status: :bad_request
+      render :new, status: :unauthorized
     end
   end
 

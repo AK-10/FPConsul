@@ -9,7 +9,7 @@ RSpec.describe Users::SessionsController, type: :request do
 
   describe "POST /user/login" do
     context "valid params" do
-      before { build(:user, name: 'login user', email: 'qwert@test.com', password: "qpwoei1029", password_confirmation: "qpwoei1029") }
+      before { create(:user, name: 'login user', email: 'qwert@test.com', password: "qpwoei1029", password_confirmation: "qpwoei1029") }
       let(:params) {
         {
           session: {
@@ -25,7 +25,7 @@ RSpec.describe Users::SessionsController, type: :request do
       let(:params) {
         {
           session: {
-            email: "qwertterws",
+            email: "qwertterws@test.com",
             password: "qpwoei1029",
           }
         }
