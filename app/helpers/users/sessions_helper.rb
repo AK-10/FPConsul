@@ -12,7 +12,7 @@ module Users
       !current_user.nil?
     end
 
-    def logout_by_user
+    def logout_user
       session.delete(:user_id)
       @current_user = nil
     end

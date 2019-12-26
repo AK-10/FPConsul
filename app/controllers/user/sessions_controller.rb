@@ -12,6 +12,8 @@ class User::SessionsController < ApplicationController
   end
 
   def destroy
+    logout_user if logged_in_by_user?
+    redirect_to :new
   end
 
   private
