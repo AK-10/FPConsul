@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   # もっと良い書き方がありそう
   resource :user do
-    get "/login", to: "users/session#new"
-    post "/login", to: "users/session#create"
-    delete "/logout", to: "users/session#destroy"
+    get "/login", to: "user/sessions#new"
+    post "/login", to: "user/sessions#create"
+    delete "/logout", to: "user/sessions#destroy"
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
