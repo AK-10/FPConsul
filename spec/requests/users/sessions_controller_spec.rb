@@ -2,13 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe User::SessionsController, type: :request do
+RSpec.describe Users::SessionsController, type: :request do
   describe "GET /user/login" do
     it { is_expected.to eq(200) }
   end
 
   describe "POST /user/login" do
     context "valid params" do
+      before { build(:user, name: 'login user', email: 'qwert@test.com', password: "qpwoei1029", password_confirmation: "qpwoei1029") }
       let(:params) {
         {
           session: {
@@ -23,7 +24,7 @@ RSpec.describe User::SessionsController, type: :request do
     context "invalid params" do
       let(:params) {
         {
-          user: {
+          session: {
             email: "qwertterws",
             password: "qpwoei1029",
           }
@@ -34,6 +35,6 @@ RSpec.describe User::SessionsController, type: :request do
   end
 
   describe "DELETE /user/logout" do
-    it { is_expected.to eq(200) }
+    it { is_expected.to eq(302) }
   end
 end
