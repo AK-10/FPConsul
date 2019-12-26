@@ -3,11 +3,11 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
-  describe "GET /users/join" do
+  describe "GET /user/join" do
     it { is_expected.to eq(200) }
   end
 
-  describe "POST /users" do
+  describe "POST /user" do
     context "valid params" do
       let(:params) {
         {
@@ -33,7 +33,7 @@ RSpec.describe UsersController, type: :request do
           }
         }
       }
-      it { is_expected.to eq(400) }
+      it { is_expected.to eq(422) }
     end
   end
 end

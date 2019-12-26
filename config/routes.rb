@@ -2,8 +2,7 @@
 
 Rails.application.routes.draw do
   scope(path_names: { new: "join" }) do
-    resources :users, only: %i(new show create edit update)
-    
+    resource :user, only: %i(new show create edit update)
     # もっと上手い書き方がありそう
     resource :users do
       get "/login", to: "users/session#new"
