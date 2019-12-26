@@ -4,11 +4,4 @@
       .card.card-body
         h2.text-center
           | ログイン
-        = form_with(scope: :session, local: true, url: login_user_path) do |f|
-          = f.label :email
-          = f.email_field :email, class: 'form-control'
-
-          = f.label :password
-          = f.password_field :password, class: 'form-control'
-
-          = f.submit 'ログイン', class: 'btn btn-primary btn-block mt-4'
+        = render partial: 'login_form'
