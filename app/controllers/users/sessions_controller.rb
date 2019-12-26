@@ -2,11 +2,13 @@
 
 class Users::SessionsController < ApplicationController
   def new
+    redirect_to current_user if logged_in_by_user?
   end
 
   def create
     user = User.find_by(email: session_params[:email])
     if user && user.authenticate(session_params[:password])
+      login_by_user(user)
       redirect_to user
     else
       render :new, status: :unauthorized
