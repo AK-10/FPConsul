@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Users::SessionsController < ApplicationController
   def new
   end
@@ -17,7 +19,6 @@ class Users::SessionsController < ApplicationController
   end
 
   private
-
     def session_params
       params.require(:session).permit(
         :email,

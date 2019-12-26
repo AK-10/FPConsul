@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   module SessionsHelper
     def login_by_user(user)
