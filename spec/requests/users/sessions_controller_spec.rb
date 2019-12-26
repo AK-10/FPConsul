@@ -9,12 +9,12 @@ RSpec.describe Users::SessionsController, type: :request do
 
   describe "POST /user/login" do
     context "valid params" do
-      before { create(:user, name: "login user", email: "qwert@test.com", password: "qpwoei1029", password_confirmation: "qpwoei1029") }
+      include_context 'user_have_already_created'
       let(:params) {
         {
           session: {
-            email: "qwert@test.com",
-            password: "qpwoei1029",
+            email: "already@created.com",
+            password: "aBcDeFgHi1357",
           }
         }
       }
@@ -25,8 +25,8 @@ RSpec.describe Users::SessionsController, type: :request do
       let(:params) {
         {
           session: {
-            email: "qwertterws@test.com",
-            password: "qpwoei1029",
+            email: "havenot@created.com",
+            password: "aBcDeFgHi1357",
           }
         }
       }
