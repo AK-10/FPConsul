@@ -19,6 +19,7 @@ RSpec.describe Users::SessionsController, type: :request do
         }
       }
       it { is_expected.to eq(302) }
+      it { expect(session[:user_id]).not_to eq(user.id) }
     end
 
     context "invalid params" do
@@ -31,10 +32,12 @@ RSpec.describe Users::SessionsController, type: :request do
         }
       }
       it { is_expected.to eq(401) }
+      it { expect(session[user.id]).to eq(nil) }
     end
   end
 
   describe "DELETE /user/logout" do
     it { is_expected.to eq(302) }
+    it { expect(session[user.id]).to eq(nil) }
   end
 end
