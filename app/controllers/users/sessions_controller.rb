@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < ApplicationController
+  before_action: :logged_in?, only: %i(new)
+
   def new
-    redirect_to current_user if logged_in_by_user?
   end
 
   def create
@@ -26,5 +27,9 @@ class Users::SessionsController < ApplicationController
         :email,
         :password,
       )
+    end
+
+    def logged_in?
+      redirect_to current_user if logged_in_by_user?
     end
 end
