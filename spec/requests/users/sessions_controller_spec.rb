@@ -18,8 +18,11 @@ RSpec.describe Users::SessionsController, type: :request do
           }
         }
       }
-      it { is_expected.to eq(302) }
-      it { expect(session[:user_id]).not_to eq(user.id) }
+
+      it do
+        is_expected.to eq(302)
+        expect(flash[:info]).to eq("ログインしました")
+      end
     end
 
     context "invalid params" do
@@ -31,13 +34,18 @@ RSpec.describe Users::SessionsController, type: :request do
           }
         }
       }
-      it { is_expected.to eq(401) }
-      it { expect(session[user.id]).to eq(nil) }
+
+      it do
+        is_expected.to eq(401)
+        expect(flash[:alert]).to eq("emailまたはpasswordが間違えています．")
+      end
     end
   end
 
   describe "DELETE /user/logout" do
-    it { is_expected.to eq(302) }
-    it { expect(session[user.id]).to eq(nil) }
+    it do
+      is_expected.to eq(302)
+      expect(flash[:info]).to eq("ログアウトしました")
+    end
   end
 end

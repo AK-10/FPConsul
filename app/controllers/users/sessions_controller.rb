@@ -10,14 +10,17 @@ class Users::SessionsController < ApplicationController
     user = User.find_by(email: session_params[:email])
     if user && user.authenticate(session_params[:password])
       login_by_user(user)
+      flash[:info] = "ログインしました"
       redirect_to user
     else
+      flash.now[:alert] = "emailまたはpasswordが間違えています．"
       render :new, status: :unauthorized
     end
   end
 
   def destroy
     logout_user if logged_in_by_user?
+    flash[:info] = "ログアウトしました"
     redirect_to login_user_path
   end
 
