@@ -1,5 +1,5 @@
 module Users
-  module SessionConcerns
+  module SessionConcern
     def login_by_user(user)
       session[:user_id] = user.id
     end
