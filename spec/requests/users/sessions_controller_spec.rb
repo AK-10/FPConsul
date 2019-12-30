@@ -9,7 +9,7 @@ RSpec.describe Users::SessionsController, type: :request do
 
   describe "POST /user/login" do
     context "valid params" do
-      include_context 'user_have_already_created'
+      include_context "user_have_already_created"
       let(:params) {
         {
           session: {

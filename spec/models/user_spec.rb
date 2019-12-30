@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_secure_password }
 
     context "email uniqueness validation" do
-      include_context 'user_have_already_created'
+      include_context "user_have_already_created"
       it { is_expected.to validate_uniqueness_of(:email) }
     end
   end

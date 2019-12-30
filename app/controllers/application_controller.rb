@@ -10,5 +10,4 @@ class ApplicationController < ActionController::Base
   def logged_in_by_user?
     !current_user.nil?
   end
-
 end
