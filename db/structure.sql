@@ -37,14 +37,17 @@ DROP TABLE IF EXISTS `reservations`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `reservations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
   `scheduled_time` datetime NOT NULL COMMENT '予約枠の日時(開始時間)',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `client_id` bigint(20) DEFAULT NULL,
+  `planner_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_reservations_on_planner_id_and_scheduled_time` (`scheduled_time`),
-  KEY `index_reservations_on_user_id` (`user_id`),
-  CONSTRAINT `fk_rails_48a92fce51` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  KEY `index_reservations_on_client_id` (`client_id`),
+  KEY `index_reservations_on_planner_id` (`planner_id`),
+  CONSTRAINT `fk_rails_2e7a5301f5` FOREIGN KEY (`planner_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_rails_9c963d6879` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `schema_migrations`;
@@ -87,6 +90,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20191216023929'),
 ('20191218074553'),
 ('20200104150857'),
-('20200104153924');
+('20200104153924'),
+('20200104183934');
 
 

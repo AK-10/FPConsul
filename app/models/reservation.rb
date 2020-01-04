@@ -2,9 +2,9 @@
 
 class Reservation < ApplicationRecord
   belongs_to :planner
-  belongs_to :user
+  belongs_to :client
 
-  validates :user, presence: true
+  validates :client, presence: true
   validates :planner, presence: true, uniqueness: { scope: %i(scheduled_time) }
   validates :scheduled_time, presence: true
   validates :scheduled_time, scheduled_time: true, if: :scheduled_time

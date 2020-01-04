@@ -32,8 +32,4 @@ RSpec.describe User, type: :model do
     end
 
   end
-
-  # describe "associations" do
-  #   it { is_expected.to have_many(:reservations).dependent(:destroy) }
-  # end
 end
