@@ -1,7 +1,7 @@
 class AddPlannerReferenceToAvailableFrames < ActiveRecord::Migration[5.2]
   def up
     add_reference :available_frames, :planner, foreign_key: { to_table: :users }, null: false
-    add_index :available_frames, [:planner_id, :scheduled_time]
+    add_index :available_frames, [:planner_id, :scheduled_time], unique: true
   end
 
   def down
