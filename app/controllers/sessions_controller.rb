@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Users::SessionsController < ApplicationController
+class SessionsController < ApplicationController
   before_action :session_exists_filter, only: %i(new)
 
   def new
