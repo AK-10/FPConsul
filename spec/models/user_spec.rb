@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to have_secure_password }
 
-    # unnecessary validate_inclusion_of
+    # validate_inclusion_of is unnecessary
     # https://gitmemory.com/issue/thoughtbot/shoulda-matchers/1201/483780992
     it do
       is_expected.to define_enum_for(:user_type).
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
           planner: 1
         )
     end
-    it { is_expected.to validate_precence_of(:user_type) }
+    it { is_expected.to validate_presence_of(:user_type) }
 
     context "email uniqueness validation" do
       include_context "user_have_already_created"
