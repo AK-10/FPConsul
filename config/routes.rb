@@ -5,8 +5,7 @@ Rails.application.routes.draw do
     resources :clients, only: %i(new create show edit update)
   end
 
-  # もっと良い書き方がありそう
-  resource :user do
+  scope :user do
     get "/login", to: "sessions#new"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
