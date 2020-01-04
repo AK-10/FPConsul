@@ -28,8 +28,11 @@ CREATE TABLE `available_frames` (
   `scheduled_time` datetime NOT NULL COMMENT '予約可能な日時(開始時間)',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `planner_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `index_available_frames_on_planner_id_and_scheduled_time` (`scheduled_time`)
+  KEY `index_available_frames_on_planner_id` (`planner_id`),
+  KEY `index_available_frames_on_planner_id_and_scheduled_time` (`planner_id`,`scheduled_time`),
+  CONSTRAINT `fk_rails_62edaf47d6` FOREIGN KEY (`planner_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `reservations`;
@@ -40,10 +43,9 @@ CREATE TABLE `reservations` (
   `scheduled_time` datetime NOT NULL COMMENT '予約枠の日時(開始時間)',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `client_id` bigint(20) DEFAULT NULL,
-  `planner_id` bigint(20) DEFAULT NULL,
+  `client_id` bigint(20) NOT NULL,
+  `planner_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `index_reservations_on_planner_id_and_scheduled_time` (`scheduled_time`),
   KEY `index_reservations_on_client_id` (`client_id`),
   KEY `index_reservations_on_planner_id` (`planner_id`),
   CONSTRAINT `fk_rails_2e7a5301f5` FOREIGN KEY (`planner_id`) REFERENCES `users` (`id`),
@@ -91,6 +93,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20191218074553'),
 ('20200104150857'),
 ('20200104153924'),
-('20200104183934');
+('20200104183934'),
+('20200104191239');
 
 

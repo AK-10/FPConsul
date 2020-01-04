@@ -35,7 +35,7 @@ RSpec.describe Reservation, type: :model do
   end
 
   describe "associations" do
-    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:client) }
     it { is_expected.to belong_to(:planner) }
   end
 end
