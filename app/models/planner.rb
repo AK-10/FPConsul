@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Planner < ApplicationRecord
+class Planner < User
   has_secure_password
   has_many :available_frames, dependent: :destroy
   has_many :reservations, dependent: :destroy
