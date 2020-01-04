@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :reservation do
-    user
+    client
     planner
   end
 end
