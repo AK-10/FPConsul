@@ -65,10 +65,10 @@ CREATE TABLE `users` (
   `password_digest` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `type` int(11) NOT NULL DEFAULT '0',
+  `user_type` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
-  KEY `index_users_on_type` (`type`)
+  KEY `index_users_on_user_type` (`user_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
