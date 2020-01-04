@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   scope(path_names: { new: "join" }) do
-    resource :user, only: %i(new show create edit update)
+    resources :users, only: %i(new create edit update)
   end
 
   # もっと良い書き方がありそう
