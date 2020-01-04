@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, length: { maximum: 100 }, format: { with: ValidFormat::EMAIL_FORMAT }
   validates :user_type, presence: true, inclusion: { in: user_types.keys }
 
-  def convert_with_user_type
+  def convert_class_with_user_type
     attrs = attributes
     case attrs.delete("user_type")
     when "client"
@@ -22,7 +22,7 @@ class User < ApplicationRecord
     end
   end
 
-  # def convert_with_user_type
+  # def convert_class_with_user_type
   #   attrs = attributes
   #   klass = attrs.delete("user_type")
   #   eval("#{klass.capitalize}.new(attrs)")
