@@ -65,8 +65,10 @@ CREATE TABLE `users` (
   `password_digest` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `type` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `index_users_on_email` (`email`)
+  UNIQUE KEY `index_users_on_email` (`email`),
+  KEY `index_users_on_type` (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -84,6 +86,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20191209063922'),
 ('20191216023929'),
 ('20191218074553'),
-('20200104150857');
+('20200104150857'),
+('20200104153924');
 
 
