@@ -13,18 +13,15 @@ class User < ApplicationRecord
   validates :user_type, presence: true, inclusion: { in: user_types.keys }
 
   def convert_class_with_user_type
-    attrs = attributes
-    case attrs.delete("user_type")
+    case user_type
     when "client"
-      return Client.new(attrs)
+      becomes(Client)
     when "planner"
-      return Planner.new(attrs)
+      becomes(Planner)
     end
   end
 
-  # def convert_class_with_user_type
-  #   attrs = attributes
-  #   klass = attrs.delete("user_type")
-  #   eval("#{klass.capitalize}.new(attrs)")
-  # end
+  def show_path
+    "/#{user_type.pluralize}/#{id}"
+  end
 end
