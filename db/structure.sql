@@ -46,6 +46,7 @@ CREATE TABLE `reservations` (
   `client_id` bigint(20) NOT NULL,
   `planner_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `index_reservations_on_planner_id_and_scheduled_time` (`planner_id`,`scheduled_time`),
   KEY `index_reservations_on_client_id` (`client_id`),
   KEY `index_reservations_on_planner_id` (`planner_id`),
   CONSTRAINT `fk_rails_2e7a5301f5` FOREIGN KEY (`planner_id`) REFERENCES `users` (`id`),
