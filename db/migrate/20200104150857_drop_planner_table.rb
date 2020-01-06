@@ -21,8 +21,8 @@ class DropPlannerTable < ActiveRecord::Migration[5.2]
     end
 
     add_reference :reservations, :planner, foreign_key: true
-    add_index :reservations, [:planner_id, :scheduled_time]
+    add_index :reservations, [:planner_id, :scheduled_time], unique: true
     add_reference :available_frames, :planner, foreign_key: true
-    add_index :avaialble_frames, [:planner_id, :scheduled_time]
+    add_index :available_frames, [:planner_id, :scheduled_time], unique: true
   end
 end
