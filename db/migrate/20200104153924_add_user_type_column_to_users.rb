@@ -7,7 +7,7 @@ class AddUserTypeColumnToUsers < ActiveRecord::Migration[5.2]
   end
 
   def down
-    remove_column :users, :user_type
     remove_index :users, :user_type
+    remove_column :users, :user_type
   end
 end
