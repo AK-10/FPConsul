@@ -11,6 +11,7 @@ class PlannersController < ApplicationController
   def create
     @planner = Planner.new(planner_params)
     if @planner.save
+      login(@planner)
       flash[:success] = "ユーザー登録が完了しました."
       redirect_to @planner.show_path
     else

@@ -11,6 +11,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
+      login(@client)
       flash[:success] = "ユーザー登録が完了しました."
       redirect_to @client.show_path
     else
