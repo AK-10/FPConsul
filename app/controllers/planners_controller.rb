@@ -33,5 +33,4 @@ class PlannersController < ApplicationController
         :password_confirmation,
       )
     end
-
 end
