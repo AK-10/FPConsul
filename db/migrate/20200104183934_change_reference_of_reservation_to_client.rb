@@ -9,7 +9,7 @@ class ChangeReferenceOfReservationToClient < ActiveRecord::Migration[5.2]
   end
 
   def down
-    remove_ference :reservation, :client, foreign_key: true
+    remove_reference :reservations, :client, foreign_key: true
     add_reference :reservations, :user, foreign_key: true
     remove_reference :reservations, :planner, foreign_key: true
   end
