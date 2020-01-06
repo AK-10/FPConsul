@@ -14,7 +14,7 @@ class ClientsController < ApplicationController
       flash[:success] = "ユーザー登録が完了しました."
       redirect_to @client.show_path
     else
-      flash[:danger] = "ユーザー登録に失敗しました.EmailまたはPasswordが間違えています."
+      flash[:danger] = "ユーザー登録に失敗しました."
       render :new, status: :unprocessable_entity
     end
   end
