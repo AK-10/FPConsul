@@ -28,7 +28,11 @@ CREATE TABLE `available_frames` (
   `scheduled_time` datetime NOT NULL COMMENT '予約可能な日時(開始時間)',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `planner_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_available_frames_on_planner_id_and_scheduled_time` (`planner_id`,`scheduled_time`),
+  KEY `index_available_frames_on_planner_id` (`planner_id`),
+  CONSTRAINT `fk_rails_62edaf47d6` FOREIGN KEY (`planner_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `reservations`;
@@ -90,6 +94,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20191218074553'),
 ('20200104150857'),
 ('20200104153924'),
-('20200104183934');
+('20200104183934'),
+('20200104191239');
 
 
