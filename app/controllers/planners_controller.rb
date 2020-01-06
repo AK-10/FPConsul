@@ -13,7 +13,7 @@ class PlannersController < ApplicationController
       flash[:success] = "ユーザー登録が完了しました."
       redirect_to @planner.show_path
     else
-      flash[:danger] = "ユーザー登録に失敗しました．"
+      flash[:danger] = "ユーザー登録に失敗しました.EmailまたはPasswordが間違えています."
       render :new, status: :unprocessable_entity
     end
   end
