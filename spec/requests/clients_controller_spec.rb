@@ -19,7 +19,10 @@ RSpec.describe ClientsController, type: :request do
           }
         }
       }
-      it { is_expected.to eq(302) }
+      it do
+        is_expected.to eq(302)
+        expect(flash[:success]).to eq("ユーザー登録が完了しました.")
+      end
     end
 
     context "invalid params" do
@@ -33,7 +36,10 @@ RSpec.describe ClientsController, type: :request do
           }
         }
       }
-      it { is_expected.to eq(422) }
+      it do
+        is_expected.to eq(422)
+        expect(flash[:danger]).to eq("ユーザー登録に失敗しました.EmailまたはPasswordが間違えています.")
+      end
     end
   end
 end
