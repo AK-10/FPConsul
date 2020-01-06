@@ -32,10 +32,6 @@ class SessionsController < ApplicationController
       )
     end
 
-    def login(user)
-      session[:user_id] = user.id
-    end
-
     def redirect_to_show
       # インスタンスを引数に渡しても期待するpathが得られない
       # (/(clients|planners)/:id にならない)
