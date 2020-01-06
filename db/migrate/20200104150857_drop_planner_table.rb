@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class DropPlannerTable < ActiveRecord::Migration[5.2]
   def up
     remove_index :reservations, [:planner_id, :scheduled_time]
     remove_reference :reservations, :planner, foreign_key: true
     remove_index :available_frames, [:planner_id, :scheduled_time]
     remove_reference :available_frames, :planner, foreign_key: true
-  
+
     drop_table :planners
   end
 

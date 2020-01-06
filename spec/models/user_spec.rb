@@ -30,6 +30,5 @@ RSpec.describe User, type: :model do
       include_context "user_have_already_created"
       it { is_expected.to validate_uniqueness_of(:email) }
     end
-
   end
 end

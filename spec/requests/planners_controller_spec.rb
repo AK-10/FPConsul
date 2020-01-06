@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe PlannersController, type: :request do
   describe "GET /planners/join" do
@@ -21,7 +23,6 @@ RSpec.describe PlannersController, type: :request do
         is_expected.to eq(302)
         expect(flash[:success]).to eq("ユーザー登録が完了しました.")
       end
-
     end
 
     context "invalid params" do

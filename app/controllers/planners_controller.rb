@@ -1,5 +1,6 @@
-class PlannersController < ApplicationController
+# frozen_string_literal: true
 
+class PlannersController < ApplicationController
   def new
     @planner = Planner.new
   end
