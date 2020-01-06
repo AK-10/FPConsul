@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController
+class ClientsController < ApplicationController
   def new
-    @user = User.new
+    @client= Client.new
   end
 
   def show
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
+    @client = Client.new(client_params)
+    if @client.save
       flash[:success] = "ユーザー登録が完了しました."
-      redirect_to @user
+      redirect_to @client
     else
       flash[:danger] = "ユーザ登録に失敗しました．"
       render :new, status: :unprocessable_entity
@@ -26,8 +26,8 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(
+    def client_params
+      params.require(:client).permit(
         :name,
         :email,
         :password,
