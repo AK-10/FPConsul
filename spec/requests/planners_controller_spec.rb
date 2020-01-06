@@ -2,18 +2,18 @@
 
 require "rails_helper"
 
-RSpec.describe ClientsController, type: :request do
-  describe "GET /clients/join" do
+RSpec.describe PlannersController, type: :request do
+  describe "GET /planners/join" do
     it { is_expected.to eq(200) }
   end
 
-  describe "POST /clients" do
+  describe "POST /planners" do
     context "valid params" do
       let(:params) {
         {
-          client: {
-            name: "test2",
-            email: "qwert@test.com",
+          planner: {
+            name: "planner test2",
+            email: "qwert@planner.com",
             password: "qpwoei1029",
             password_confirmation: "qpwoei1029"
           }
@@ -28,7 +28,7 @@ RSpec.describe ClientsController, type: :request do
     context "invalid params" do
       let(:params) {
         {
-          client: {
+          planner: {
             name: "test2",
             email: "qwertterws",
             password: "qpwoei1029",

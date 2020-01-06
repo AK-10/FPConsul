@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :clients, only: %i(new create show edit update)
   end
 
+  scope(path_names: { new: "join" }) do
+    resources :planners, only: %i(new create show edit update)
+  end
+
   scope :user do
     get "/login", to: "sessions#new"
     post "/login", to: "sessions#create"
