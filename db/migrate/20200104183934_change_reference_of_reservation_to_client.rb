@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeReferenceOfReservationToClient < ActiveRecord::Migration[5.2]
   def up
     add_reference :reservations, :client, foreign_key: { to_table: :users }, null: false
