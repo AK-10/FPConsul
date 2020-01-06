@@ -10,7 +10,7 @@ RSpec.describe Reservation, type: :model do
 
     subject { build(:reservation, scheduled_time: "2019-12-19 13:30:00".to_time) }
 
-    it { is_expected.to validate_presence_of(:user) }
+    it { is_expected.to validate_presence_of(:client) }
     it { is_expected.to validate_presence_of(:planner) }
     it { is_expected.to validate_presence_of(:scheduled_time) }
     it { is_expected.to validate_uniqueness_of(:planner).scoped_to(:scheduled_time) }
@@ -35,7 +35,7 @@ RSpec.describe Reservation, type: :model do
   end
 
   describe "associations" do
-    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:client) }
     it { is_expected.to belong_to(:planner) }
   end
 end
