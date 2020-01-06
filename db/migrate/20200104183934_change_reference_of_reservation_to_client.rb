@@ -12,5 +12,6 @@ class ChangeReferenceOfReservationToClient < ActiveRecord::Migration[5.2]
     remove_reference :reservations, :client, foreign_key: true
     add_reference :reservations, :user, foreign_key: true
     remove_reference :reservations, :planner, foreign_key: true
+    remove_index :reservations, [:planner_id, :scheduled_time]
   end
 end
