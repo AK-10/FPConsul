@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Users::SessionsController, type: :request do
+RSpec.describe SessionsController, type: :request do
   describe "GET /user/login" do
     it { is_expected.to eq(200) }
   end

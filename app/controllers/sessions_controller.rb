@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class Users::SessionsController < ApplicationController
-  before_action :session_exists_filter, only: %i(new)
+class SessionsController < ApplicationController
+  before_action :redirect_to_show, only: %i(new)
 
   def new
   end
@@ -9,9 +9,9 @@ class Users::SessionsController < ApplicationController
   def create
     user = User.find_by(email: session_params[:email])
     if user && user.authenticate(session_params[:password])
-      login_by_user(user)
+      login(user)
       flash[:info] = "ログインしました"
-      redirect_to user
+      redirect_to_show
     else
       flash.now[:alert] = "emailまたはpasswordが間違えています．"
       render :new, status: :unauthorized
@@ -19,9 +19,9 @@ class Users::SessionsController < ApplicationController
   end
 
   def destroy
-    logout_user if logged_in_by_user?
+    logout_user if logged_in?
     flash[:info] = "ログアウトしました"
-    redirect_to login_user_path
+    redirect_to login_path
   end
 
   private
@@ -32,15 +32,18 @@ class Users::SessionsController < ApplicationController
       )
     end
 
-    def session_exists_filter
-      redirect_to current_user if logged_in_by_user?
-    end
-
-    def login_by_user(user)
+    def login(user)
       session[:user_id] = user.id
     end
 
-    def logout_user
+    def redirect_to_show
+      # インスタンスを引数に渡しても期待するpathが得られない
+      # (/(clients|planners)/:id にならない)
+      # redirect_to current_user.convert_class_with_user_type
+      redirect_to current_user.show_path if logged_in?
+    end
+
+    def logout
       session.delete(:user_id)
       @current_user = nil
     end
