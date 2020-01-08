@@ -12,8 +12,7 @@ class ClientsController < ApplicationController
     @client = Client.new(client_params)
     if @client.save
       login(@client)
-      flash[:success] = "ユーザー登録が完了しました."
-      redirect_to @client.show_path
+      redirect_to @client.show_path, success: "ユーザー登録が完了しました."
     else
       flash.now[:danger] = "ユーザー登録に失敗しました."
       render :new, status: :unprocessable_entity
