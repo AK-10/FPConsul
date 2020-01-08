@@ -1,18 +1,38 @@
 module AvailableFramesHelper
-  def time_ranges
-    first_time = Tod::TimeOfDay.new 10
-    last_time = Tod::TimeOfDay.new 18
+
+  def start_times
+    start_time = Tod::TimeOfDay.new(10)
+    last_time = Tod::TimeOfDay.new(17, 30)
     step_min = 30.minutes
-    scopes = []
+    times = []
 
     while true do
-      end_time = first_time + step_min
-      break if end_time > last_time
+      break if start_time > last_time
+      times << start_time
 
-      scopes << "#{first_time.to_s} ~ #{end_time.to_s}"
-      first_time = end_time
+      start_time += step_min
     end
 
-    scopes
+    times
+  end
+
+  def time_ranges
+    step_min = 30.minutes
+    start_times.map do |start_time|
+      end_time = start_time + step_min
+      "#{start_time.to_s} ~ #{end_time.to_s}"
+    end
+  end
+
+  def normalized_frames(frames)
+    frames
+  end
+
+  def time_tables(frames)
+    time_ranges.zip(normalized_frames(frames))
+  end
+
+  def date_range(day)
+    day..day.since(7.days)
   end
 end

@@ -1,5 +1,4 @@
 - today = @from.to_date
-- date_range = today..today.since(7.days)
 
 .container-fluid
   .row.mt-5.d-flex.align-item-center
@@ -9,12 +8,12 @@
           tr
             th scope="col"
 
-            - date_range.each do |date|
+            - date_range(@from.to_date).each do |date|
               th scope="col"
                 div.text-center
                   | #{date.strftime("%Y年 %m月 %d日")}
         tbody
-          - @times.zip(time_ranges).each do |days, range|
+          - time_tables(@times).each do |range, days|
             tr
               th = range
               - days.each do |time|
