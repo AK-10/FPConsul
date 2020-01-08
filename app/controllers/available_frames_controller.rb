@@ -1,10 +1,12 @@
 class AvailableFramesController < ApplicationController
+  before_action :logged_in_as_client?
 
   def index
-    from = (params[:from]&.to_time || Time.now).change(hour: 0, min: 0, sec: 0)
-    to = from.since(7.days)
+    @from = (params[:from]&.to_time || Time.now).change(hour: 0, min: 0, sec: 0)
+    to = @from.since(7.days)
     @client = current_user.convert_class_with_user_type
-    @available_frames = client.available_frames.where(scheduled_time: (from)..(to))
+    @available_frames = @client.available_frames.where(scheduled_time: (@from)..(to))
+    @times = Array.new(15).map{ Array.new(7, rand(2) == 1) }
   end
 
   def create

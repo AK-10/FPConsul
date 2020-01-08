@@ -1,0 +1,23 @@
+- today = @from.to_date
+- date_range = today..today.since(7.days)
+
+.container-fluid
+  .row.mt-5.d-flex.align-item-center
+    .col-sm-12.col-md-8.offset-md-2.col-lg-6.offset-lg-3
+      table.table.table-bordered
+        thread
+          tr
+            th scope="col"
+
+            - date_range.each do |date|
+              th scope="col"
+                div.text-center
+                  | #{date.strftime("%Y年 %m月 %d日")}
+        tbody
+          - @times.each do |days|
+            tr
+              th = "時間"
+              - days.each do |time|
+                td class="#{time ? "bg-primary" : nil}"
+                  div.text-center
+                    | #{time ? "○" : "×"}
