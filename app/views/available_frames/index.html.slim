@@ -1,22 +1,19 @@
-- today = @from.to_date
-
 .container-fluid
   .row.mt-5.d-flex.align-item-center
-    .col-sm-12.col-md-8.offset-md-2.col-lg-6.offset-lg-3
+    .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
       table.table.table-bordered
         thread
           tr
             th scope="col"
-
-            - date_range(@from.to_date).each do |date|
-              th scope="col"
-                div.text-center
-                  | #{date.strftime("%Y年 %m月 %d日")}
+              - date_range(@from.to_date).each do |date|
+                th scope="col"
+                  div.text-center
+                    | #{date.strftime("%Y年 %m月 %d日")}
         tbody
-          - time_tables(@times).each do |range, days|
+          - time_tables(@available_frames, @from.to_date).each do |range, frames|
             tr
               th = range
-              - days.each do |time|
-                td class="#{time ? "bg-primary" : nil}"
-                  div.text-center
-                    | #{time ? "○" : "×"}
+              - frames.each do |frame|
+                td class="#{frame.is_available ? "bg-primary" : nil}"
+                  div.text-center.frame-cell data-datetime = "#{frame.datetime}"
+                    | #{frame.is_available ? "○" : "×"}
