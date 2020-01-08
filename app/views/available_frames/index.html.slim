@@ -14,9 +14,9 @@
                 div.text-center
                   | #{date.strftime("%Y年 %m月 %d日")}
         tbody
-          - @times.each do |days|
+          - @times.zip(time_ranges).each do |days, range|
             tr
-              th = "時間"
+              th = range
               - days.each do |time|
                 td class="#{time ? "bg-primary" : nil}"
                   div.text-center
