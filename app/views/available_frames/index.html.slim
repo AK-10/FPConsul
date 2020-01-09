@@ -16,10 +16,10 @@
                 .text-center = range
               - frames.each do |frame|
                 td class="#{frame.is_available ? "bg-success" : nil}"
-                  .text-center.frame-cell data-datetime = "#{frame.datetime}" data-is_available = "#{frame.is_available}"
+                  .text-center.frame-cell
                     | #{frame.is_available ? "○" : "×"}
                   .text-center
-                    button.btn.btn-link.btn-sm type="button" data-toggle="modal" data-target = "#confirmModal"
+                    button.available_frame-trigger-btn.btn.btn-link.btn-sm type="button" data-toggle="modal" data-target = "#confirmModal"data-datetime = "#{frame.datetime}" data-is_available = "#{frame.is_available}" 
                       | #{frame.is_available ? "無効にする" : "有効にする"}
 
 
@@ -32,7 +32,7 @@
           span aria-hidden="true"
             | &times;
       .modal-body
-        p
+        p#available_frame-request-confirm-text
           | ...の予約枠を...しますか？
         = form_with(model: AvailableFrame.new, local: true, url: planner_available_frames_path) do |f|
           = f.text_field :scheduled_time, id: "available_frame-scheduled_time", class: "d-none"
