@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :planners, only: [] do
-    resources :available_frames, only: %i(index new create destroy)
+    resources :available_frames, only: %i(index create destroy)
   end
 
   scope :user do
