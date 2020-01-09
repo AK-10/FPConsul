@@ -12,15 +12,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, length: { maximum: 100 }, format: { with: ValidFormat::EMAIL_FORMAT }
   validates :user_type, presence: true, inclusion: { in: user_types.keys }
 
-  def convert_class_with_user_type
-    case user_type
-    when "client"
-      becomes(Client)
-    when "planner"
-      becomes(Planner)
-    end
-  end
-
   def show_path
     "/#{user_type.pluralize}/#{id}"
   end
