@@ -30,10 +30,4 @@ class ApplicationController < ActionController::Base
   def logged_in_as_planner?
     !!current_planner
   end
-
-  # User.user_types.keys.map { |key| [key, "logged_in_as_#{key}?".to_sym] }.each do |type, sym|
-  #   define_method(sym) do
-  #     logged_in? && eval("current_user.#{type}?")
-  #   end
-  # end
 end
