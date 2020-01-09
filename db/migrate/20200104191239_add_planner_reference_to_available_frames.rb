@@ -8,6 +8,6 @@ class AddPlannerReferenceToAvailableFrames < ActiveRecord::Migration[5.2]
 
   def down
     remove_index :available_frames, column: [:planner_id, :scheduled_time]
-    remove_reference :available_frames, :planner, foreign_key: { to_table: :users}
+    remove_reference :available_frames, :planner, foreign_key: { to_table: :users }
   end
 end

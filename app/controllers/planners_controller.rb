@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-class ClientsController < ApplicationController
+class PlannersController < ApplicationController
   def new
-    @client= Client.new
+    @planner = Planner.new
   end
 
   def show
   end
 
   def create
-    @client = Client.new(client_params)
-    if @client.save
-      login(@client)
-      redirect_to client_path(@client), flash: { success: "ユーザー登録が完了しました." }
+    @planner = Planner.new(planner_params)
+    if @planner.save
+      login(@planner)
+      redirect_to planner_path(@planner), flash: { success: "ユーザー登録が完了しました." }
     else
       flash.now[:danger] = "ユーザー登録に失敗しました."
       render :new, status: :unprocessable_entity
@@ -26,8 +26,8 @@ class ClientsController < ApplicationController
   end
 
   private
-    def client_params
-      params.require(:client).permit(
+    def planner_params
+      params.require(:planner).permit(
         :name,
         :email,
         :password,
