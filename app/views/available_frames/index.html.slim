@@ -12,8 +12,31 @@
         tbody
           - time_tables(@available_frames, @from.to_date).each do |range, frames|
             tr
-              th = range
+              th
+                .text-center = range
               - frames.each do |frame|
-                td class="#{frame.is_available ? "bg-primary" : nil}"
-                  div.text-center.frame-cell data-datetime = "#{frame.datetime}"
+                td class="#{frame.is_available ? "bg-success" : nil}"
+                  .text-center.frame-cell data-datetime = "#{frame.datetime}" data-is_available = "#{frame.is_available}"
                     | #{frame.is_available ? "○" : "×"}
+                  .text-center
+                    button.btn.btn-link.btn-sm type="button" data-toggle="modal" data-target = "#confirmModal"
+                      | #{frame.is_available ? "無効にする" : "有効にする"}
+
+
+#confirmModal.modal.fade tabindex=-1
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title 確認
+        button.close data-dismiss='modal' aria-label="キャンセル"
+          span aria-hidden="true"
+            | &times;
+      .modal-body
+        p
+          | ...の予約枠を...しますか？
+      .modal-footer
+        button.btn.btn-secondary type="button" data-dismiss="modal"
+          | 閉じる
+        button.btn.btn-primary type="button"
+          | OK
+
