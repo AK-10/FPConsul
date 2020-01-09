@@ -34,9 +34,9 @@
       .modal-body
         p
           | ...の予約枠を...しますか？
-      .modal-footer
-        button.btn.btn-secondary type="button" data-dismiss="modal"
-          | 閉じる
-        button.btn.btn-primary type="button"
-          | OK
-
+        = form_with(model: AvailableFrame.new, local: true, url: planner_available_frames_path) do |f|
+          = f.text_field :scheduled_time, id: "available_frame-scheduled_time", class: "d-none"
+          .modal-footer
+            button.btn.btn-secondary type="button" data-dismiss="modal"
+              | キャンセル
+            = f.submit "OK", class: "btn btn-primary"
