@@ -3,15 +3,11 @@ module AvailableFramesHelper
     first_time = Tod::TimeOfDay.new(10)
     last_time = Tod::TimeOfDay.new(17, 30)
     step_min = 30.minutes
-    times = []
 
-    while true do
-      break if first_time > last_time
-      times << first_time
-      first_time += step_min
-    end
-
-    times
+    Tod::Shift.new(first_time, last_time)
+      .range
+      .step(step_min)
+      .map{ |t| Tod::TimeOfDay.from_second_of_day(t) }
   end
 
   def time_ranges
