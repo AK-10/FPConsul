@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe AvailableFramesController, type: :request do
   let(:planner) { create(:planner) }
@@ -17,7 +19,7 @@ RSpec.describe AvailableFramesController, type: :request do
   end
 
   describe "POST /planners/:planner_id/available_frames" do
-    context 'valid params' do
+    context "valid params" do
       let(:params) {
         {
           available_frame: {
@@ -30,10 +32,9 @@ RSpec.describe AvailableFramesController, type: :request do
         is_expected.to eq(302)
         expect(flash[:success]).to eq("予約枠を追加しました")
       end
-
     end
 
-    context 'invalid params' do
+    context "invalid params" do
       let(:params) {
         {
           available_frame: {
@@ -46,7 +47,6 @@ RSpec.describe AvailableFramesController, type: :request do
         is_expected.to eq(422)
         expect(flash[:danger]).to eq("予約枠の作成に失敗しました")
       end
-      
     end
   end
 end

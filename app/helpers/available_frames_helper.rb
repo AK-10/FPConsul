@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AvailableFramesHelper
   def start_times
     first_time = Tod::TimeOfDay.new(10)
@@ -7,14 +9,14 @@ module AvailableFramesHelper
     Tod::Shift.new(first_time, last_time)
       .range
       .step(step_min)
-      .map{ |t| Tod::TimeOfDay.from_second_of_day(t) }
+      .map { |t| Tod::TimeOfDay.from_second_of_day(t) }
   end
 
   def time_ranges
     step_min = 30.minutes
     start_times.map do |start_time|
       end_time = start_time + step_min
-      "#{start_time.to_s} ~ #{end_time.to_s}"
+      "#{start_time} ~ #{end_time}"
     end
   end
 
@@ -36,11 +38,10 @@ module AvailableFramesHelper
     end
 
     # timeでグループ化し，valuesをとることで二次元配列にする
-    base_cells.group_by{ |cell| cell.time }.values
+    base_cells.group_by { |cell| cell.time }.values
   end
 
   def time_tables(frames, start_day)
-    normed = normalized_frames(frames, start_day)
     time_ranges.zip(normalized_frames(frames, start_day))
   end
 

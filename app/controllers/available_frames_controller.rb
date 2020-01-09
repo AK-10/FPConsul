@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvailableFramesController < ApplicationController
   before_action :logged_in_as_planner?
 
