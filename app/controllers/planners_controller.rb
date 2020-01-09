@@ -11,10 +11,10 @@ class PlannersController < ApplicationController
   def create
     @planner = Planner.new(planner_params)
     if @planner.save
-      flash[:success] = "ユーザー登録が完了しました."
-      redirect_to @planner.show_path
+      login(@planner)
+      redirect_to planner_path(@planner), flash: { success: "ユーザー登録が完了しました." }
     else
-      flash[:danger] = "ユーザー登録に失敗しました.EmailまたはPasswordが間違えています."
+      flash.now[:danger] = "ユーザー登録に失敗しました."
       render :new, status: :unprocessable_entity
     end
   end

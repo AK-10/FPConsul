@@ -38,7 +38,7 @@ RSpec.describe ClientsController, type: :request do
       }
       it do
         is_expected.to eq(422)
-        expect(flash[:danger]).to eq("ユーザー登録に失敗しました.EmailまたはPasswordが間違えています.")
+        expect(flash[:danger]).to eq("ユーザー登録に失敗しました.")
       end
     end
   end

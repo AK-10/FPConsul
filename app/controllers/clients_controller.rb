@@ -11,10 +11,10 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
-      flash[:success] = "ユーザー登録が完了しました."
-      redirect_to @client.show_path
+      login(@client)
+      redirect_to client_path(@client), flash: { success: "ユーザー登録が完了しました." }
     else
-      flash[:danger] = "ユーザー登録に失敗しました.EmailまたはPasswordが間違えています."
+      flash.now[:danger] = "ユーザー登録に失敗しました."
       render :new, status: :unprocessable_entity
     end
   end
