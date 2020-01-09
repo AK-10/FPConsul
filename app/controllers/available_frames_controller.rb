@@ -13,11 +13,10 @@ class AvailableFramesController < ApplicationController
     available_frame = planner.available_frames.build(available_frame_params)
     if available_frame.save
       flash[:success] = "予約枠を追加しました"
-      redirect_to action: :index
     else
       flash[:danger] = "予約枠の作成に失敗しました"
-      redirect_to action: :index, status: 422
     end
+    redirect_to action: :index
   end
 
   def destroy
