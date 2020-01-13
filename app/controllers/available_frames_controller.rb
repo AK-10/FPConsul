@@ -18,7 +18,7 @@ class AvailableFramesController < ApplicationController
       redirect_to action: :index
     else
       flash[:danger] = "予約枠の作成に失敗しました"
-      redirect_to action: :index, status: 422
+      redirect_to action: :index
     end
   end
 

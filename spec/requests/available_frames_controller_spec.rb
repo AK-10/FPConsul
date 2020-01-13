@@ -29,7 +29,7 @@ RSpec.describe AvailableFramesController, type: :request do
       }
 
       it do
-        is_expected.to eq(302)
+        is_expected.to redirect_to planner_available_frames_path(planner)
         expect(flash[:success]).to eq("予約枠を追加しました")
       end
     end
@@ -44,7 +44,7 @@ RSpec.describe AvailableFramesController, type: :request do
       }
 
       it do
-        is_expected.to eq(422)
+        is_expected.to redirect_to planner_available_frames_path(planner)
         expect(flash[:danger]).to eq("予約枠の作成に失敗しました")
       end
     end
