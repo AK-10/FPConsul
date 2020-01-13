@@ -10,8 +10,7 @@
             th scope="col"
               - date_range(@from.to_date).each do |date|
                 th scope="col"
-                  div.text-center
-                    | #{date.strftime("%Y年 %m月 %d日")}
+                  div.text-center = date.strftime("%Y年 %m月 %d日")
         tbody
           - time_tables(@available_frames, @from.to_date).each do |range, frames|
             tr
