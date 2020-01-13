@@ -4,7 +4,7 @@ class AvailableFramesController < ApplicationController
   before_action :logged_in_as_planner?
 
   def index
-    @from = (params[:from]&.to_time || Time.now).change(hour: 0, min: 0, sec: 0)
+    @from = (params[:from]&.in_time_zone || Time.current).change(hour: 0, min: 0, sec: 0)
     to = @from.since(7.days)
     planner = current_planner
     @available_frames = planner.available_frames.where(scheduled_time: (@from)..(to))
