@@ -11,7 +11,7 @@ RSpec.describe AvailableFramesController, type: :request do
   end
 
   before do
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: planner.id })
+    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: planner_id })
   end
 
   describe "GET /planners/:planner_id/available_frames" do
