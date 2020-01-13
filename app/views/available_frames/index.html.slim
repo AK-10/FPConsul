@@ -21,9 +21,10 @@
                   .text-center.frame-cell
                     | #{frame.is_available ? "○" : "×"}
                   .text-center
-                    button class="available_frame-trigger-btn btn btn-light btn-sm " type="button" data-toggle="modal" data-target = "#confirmModal"data-datetime = "#{frame.datetime}" data-is_available = "#{frame.is_available}" 
-                      | #{frame.is_available ? "無効にする" : "有効にする"}
-
+                    = button_tag frame.is_available ? "無効にする" : "有効にする",
+                        class: "available_frame-trigger-btn btn btn-light btn-sm",
+                        type: "button",
+                        data: { toggle: "modal", target: "#confirmModal", datetime: frame.datetime, is_available: frame.is_available }
 
 #confirmModal.modal.fade tabindex=-1
   .modal-dialog role="document"
