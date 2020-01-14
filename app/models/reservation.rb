@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Reservation < ApplicationRecord
-  belongs_to :planner
+  belongs_to :available_frame
   belongs_to :client
 
   validates :client, presence: true
