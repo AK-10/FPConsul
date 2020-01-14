@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module AvailableFramesHelper
+  delegate :date_range, to: FrameTable
 
   def time_ranges
     step_min = 30.minutes
@@ -13,9 +14,5 @@ module AvailableFramesHelper
   def time_table(frames, start_day)
     frame_table = FrameTable.new(frames, start_day)
     time_ranges.zip(frame_table.to_matrix)
-  end
-
-  def date_range(day)
-    FrameTable::date_range(day)
   end
 end
