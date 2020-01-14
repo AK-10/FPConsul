@@ -2,7 +2,6 @@
 class FrameTable
   attr_reader :frames, :start_day
 
-  # using date_range, time_tables in index.html.slim
   def initialize(frames, start_day)
     @frames = frames
     @start_day = start_day
