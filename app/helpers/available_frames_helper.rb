@@ -12,7 +12,7 @@ module AvailableFramesHelper
   end
 
   def time_table(frames, start_day)
-    frame_table = FrameTable.new(frames, start_day)
-    time_ranges.zip(frame_table.to_matrix)
+    table_matrix = FrameTable.generate_matrix(frames, start_day)
+    time_ranges.zip(table_matrix)
   end
 end

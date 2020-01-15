@@ -2,14 +2,14 @@
 class FrameTable
   attr_reader :frames, :start_day
 
-  def initialize(frames, start_day)
-    @frames = frames
-    @start_day = start_day
-  end
+  # def initialize(frames, start_day)
+  #   @frames = frames
+  #   @start_day = start_day
+  # end
 
   # framesはplannerがstart_dayから7日間の有効な予約枠のリスト
   # 一週間の予約枠を取得する． 表示にテーブルを用いているので 16 * 7の二次元配列を作る
-  def to_matrix
+  def self.generate_matrix(frames, start_day)
     # ベースとなる値の配列を作成
     # 予約可能枠を当てはめる必要があるため,いきなり二次元配列にしない(二次元配列にすると探索が面倒)
     base_cells = FrameTable.start_times.flat_map do |start_time|
