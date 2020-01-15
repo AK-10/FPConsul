@@ -5,7 +5,7 @@ module AvailableFramesHelper
 
   def time_ranges
     step_min = 30.minutes
-    FrameTable::start_times.map do |start_time|
+    FrameTable.start_times.map do |start_time|
       end_time = start_time + step_min
       "#{start_time} ~ #{end_time}"
     end

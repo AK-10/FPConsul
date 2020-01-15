@@ -12,8 +12,8 @@ class FrameTable
   def to_matrix
     # ベースとなる値の配列を作成
     # 予約可能枠を当てはめる必要があるため,いきなり二次元配列にしない(二次元配列にすると探索が面倒)
-    base_cells = FrameTable::start_times.flat_map do |start_time|
-      FrameTable::date_range(start_day).map do |day|
+    base_cells = FrameTable.start_times.flat_map do |start_time|
+      FrameTable.date_range(start_day).map do |day|
         OpenStruct.new(datetime: start_time.on(day), time: start_time, is_available: false)
       end
     end
