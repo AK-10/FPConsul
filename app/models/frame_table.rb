@@ -42,5 +42,4 @@ class FrameTable
   def self.date_range(day)
     day..day.since(7.days)
   end
-
 end
