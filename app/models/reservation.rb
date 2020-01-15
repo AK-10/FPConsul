@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 class Reservation < ApplicationRecord
-  belongs_to :available_frame
   belongs_to :client
+  belongs_to :available_frame
 
   validates :client, presence: true
-  validates :planner, presence: true, uniqueness: { scope: %i(scheduled_time) }
-  validates :scheduled_time, presence: true
-  validates :scheduled_time, scheduled_time: true, if: :scheduled_time
-  validate :validate_available_frame_exists, if: %i(planner scheduled_time)
+  validates :available_frame, presence: true, unique: true
+  validates :client_id, uniqueness: { scope: [:available_frame_id] }
 
   private
     def validate_available_frame_exists
