@@ -11,8 +11,7 @@ RSpec.describe Reservation, type: :model do
     subject { build(:reservation, scheduled_time: "2019-12-19 13:30:00".to_time) }
 
     it { is_expected.to validate_presence_of(:client) }
-    it { is_expected.to validate_presence_of(:planner) }
-    it { is_expected.to validate_presence_of(:scheduled_time) }
+    it { is_expected.to validate_presence_of(:available_frame_id) }
     it { is_expected.to validate_uniqueness_of(:planner).scoped_to(:scheduled_time) }
 
     describe "available frame of planner exist validation" do
@@ -36,6 +35,6 @@ RSpec.describe Reservation, type: :model do
 
   describe "associations" do
     it { is_expected.to belong_to(:client) }
-    it { is_expected.to belong_to(:planner) }
+    it { is_expected.to belong_to(:available_frame) }
   end
 end
