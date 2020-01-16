@@ -14,7 +14,7 @@ class ClientsController < ApplicationController
       login(@client)
       redirect_to client_path(@client), flash: { success: "ユーザー登録が完了しました." }
     else
-      flash.now[:danger] = "ユーザー登録に失敗しました."
+      flash.now[:danger] = @client.errors.full_messages.join("<br>").html_safe
       render :new, status: :unprocessable_entity
     end
   end

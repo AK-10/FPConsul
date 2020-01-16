@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       flash[:info] = "ログインしました"
       redirect_to_show
     else
-      flash.now[:alert] = "emailまたはpasswordが間違えています．"
+      flash.now[:alert] = user.errors.full_messages.join('<br>').html_safe
       render :new, status: :unauthorized
     end
   end
