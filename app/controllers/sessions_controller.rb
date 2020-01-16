@@ -35,7 +35,6 @@ class SessionsController < ApplicationController
     def redirect_to_show
       # インスタンスを引数に渡しても期待するpathが得られない
       # (/(clients|planners)/:id にならない)
-      # redirect_to current_user.convert_class_with_user_type
       redirect_to current_user.show_path if logged_in?
     end
 

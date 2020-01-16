@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :planners, only: %i(new create show edit update)
   end
 
+  resources :planners, only: [] do
+    resources :available_frames, only: %i(index create destroy)
+  end
+
   scope :user do
     get "/login", to: "sessions#new"
     post "/login", to: "sessions#create"

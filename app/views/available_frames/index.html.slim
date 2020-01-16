@@ -1,0 +1,43 @@
+- content_for :head do
+  = javascript_pack_tag "available_frames/index.js"
+
+.container-fluid
+  .row.mt-5.d-flex.align-item-center
+    .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+      table.table.table-bordered
+        thread
+          tr
+            th scope="col"
+              - date_range(@from.to_date).each do |date|
+                th scope="col"
+                  div.text-center = date.strftime("%Y年 %m月 %d日 (%a)")
+        tbody
+          - time_table(@available_frames, @from.to_date).each do |range, frames|
+            tr
+              th
+                .text-center = range
+                - frames.each do |frame|
+                  td class="#{frame.is_available ? "bg-success" : nil}"
+                    .text-center.frame-cell = frame.is_available ? "○" : "×"
+                    .text-center
+                      = button_tag frame.is_available ? "無効にする" : "有効にする",
+                          class: "available_frame-trigger-btn btn btn-light btn-sm",
+                          type: "button",
+                          data: { toggle: "modal", target: "#confirmModal", datetime: frame.datetime, is_available: frame.is_available }
+
+#confirmModal.modal.fade tabindex=-1
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title 確認
+        button.close data-dismiss='modal' aria-label="キャンセル"
+          span aria-hidden="true"
+            | &times;
+      .modal-body
+        p#available_frame-request-confirm-text
+        = form_with(model: AvailableFrame.new, local: true, url: planner_available_frames_path) do |f|
+          = f.text_field :scheduled_time, id: "available_frame-scheduled_time", class: "d-none"
+          .modal-footer
+            button.btn.btn-secondary type="button" data-dismiss="modal"
+              | キャンセル
+            = f.submit "OK", class: "btn btn-primary"
