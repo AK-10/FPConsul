@@ -14,20 +14,21 @@ RSpec.describe FrameTable, type: :model do
     ]
   }
 
-  let(:target) { FrameTable.generate_matrix(frames, start_day) }
+  let(:target) { FrameTable.new(frames, start_day) }
 
   describe "self.generate_matrix" do
     context "no frames on sunday" do
-      let(:sundays) { target.transpose[4]}
-      subject { sundays.reduce(true) { |acc, item| acc && !item.is_available } }
+      let(:sundays) { target.to_matrix.transpose[4]}
+      subject { sundays.none? { |item| item.is_available } }
       it { expect(subject).to eq(true) }
     end
 
     # 予約枠は正しく入っているか
     context "confirm available_frame at correct block" do
-      it { expect(target[6][1].is_available).to eq(true) }
-      it { expect(target[7][1].is_available).to eq(true) }
-      it { expect(target[4][2].is_available).to eq(true) }
+      subject { target.to_matrix }
+      it { expect(subject[6][1].is_available).to eq(true) }
+      it { expect(subject[3][2].is_available).to eq(true) }
+      it { expect(subject[7][1].is_available).to eq(true) }
     end
   end
 end
