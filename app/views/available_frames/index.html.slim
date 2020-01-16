@@ -10,21 +10,20 @@
             th scope="col"
               - date_range(@from.to_date).each do |date|
                 th scope="col"
-                  div.text-center
-                    | #{date.strftime("%Y年 %m月 %d日")}
+                  div.text-center = date.strftime("%Y年 %m月 %d日 (%a)")
         tbody
-          - time_tables(@available_frames, @from.to_date).each do |range, frames|
+          - time_table(@available_frames, @from.to_date).each do |range, frames|
             tr
               th
                 .text-center = range
-              - frames.each do |frame|
-                td class="#{frame.is_available ? "bg-success" : nil}"
-                  .text-center.frame-cell
-                    | #{frame.is_available ? "○" : "×"}
-                  .text-center
-                    button class="available_frame-trigger-btn btn btn-light btn-sm " type="button" data-toggle="modal" data-target = "#confirmModal"data-datetime = "#{frame.datetime}" data-is_available = "#{frame.is_available}" 
-                      | #{frame.is_available ? "無効にする" : "有効にする"}
-
+                - frames.each do |frame|
+                  td class="#{frame.is_available ? "bg-success" : nil}"
+                    .text-center.frame-cell = frame.is_available ? "○" : "×"
+                    .text-center
+                      = button_tag frame.is_available ? "無効にする" : "有効にする",
+                          class: "available_frame-trigger-btn btn btn-light btn-sm",
+                          type: "button",
+                          data: { toggle: "modal", target: "#confirmModal", datetime: frame.datetime, is_available: frame.is_available }
 
 #confirmModal.modal.fade tabindex=-1
   .modal-dialog role="document"
