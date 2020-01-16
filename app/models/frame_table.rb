@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 一週間の予約枠データをあらわすクラス
 class FrameTable
   attr_reader :frames, :start_day

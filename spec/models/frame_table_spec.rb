@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe FrameTable, type: :model do
@@ -7,7 +9,7 @@ RSpec.describe FrameTable, type: :model do
 
   let(:planner) { build(:planner) }
   let(:start_day) { Time.current.to_date }
-  let(:frames) { 
+  let(:frames) {
     [ build(:available_frame, planner: planner, scheduled_time: "2019-12-19 13:00:00".in_time_zone),
       build(:available_frame, planner: planner, scheduled_time: "2019-12-19 13:30:00".in_time_zone),
       build(:available_frame, planner: planner, scheduled_time: "2019-12-20 11:30:00".in_time_zone),
@@ -18,7 +20,7 @@ RSpec.describe FrameTable, type: :model do
 
   describe "self.generate_matrix" do
     context "no frames on sunday" do
-      let(:sundays) { target.to_matrix.transpose[4]}
+      let(:sundays) { target.to_matrix.transpose[4] }
       subject { sundays.none? { |item| item.is_available } }
       it { expect(subject).to eq(true) }
     end
