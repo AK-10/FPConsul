@@ -44,9 +44,8 @@ RSpec.describe AvailableFramesController, type: :request do
 
       it do
         is_expected.to eq(302)
-        expect(flash[:danger]).to eq("予約枠の作成に失敗しました")
+        expect(flash[:danger]).to eq("Scheduled time can't be except 0 or 30 minutes")
       end
-      
     end
   end
 end
