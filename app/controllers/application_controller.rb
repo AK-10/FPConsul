@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in_by_user?
+  helper_method :current_user, :current_planner, :current_client, :logged_in_by_user?
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])

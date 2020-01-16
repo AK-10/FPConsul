@@ -17,15 +17,21 @@
               th
                 .text-center = range
                 - frames.each do |frame|
-                  td class="#{frame.is_available ? "bg-success" : nil}"
-                    .text-center.frame-cell = frame.is_available ? "○" : "×"
+                  td class="#{frame.id ? "bg-success" : nil}"
+                    .text-center.frame-cell = frame.id ? "○" : "×"
                     .text-center
-                      = button_tag frame.is_available ? "無効にする" : "有効にする",
-                          class: "available_frame-trigger-btn btn btn-light btn-sm",
-                          type: "button",
-                          data: { toggle: "modal", target: "#confirmModal", datetime: frame.datetime, is_available: frame.is_available }
+                      - if frame.id
+                        = button_tag "無効にする",
+                            class: "available_frame-trigger-btn btn btn-light btn-sm",
+                            type: "button",
+                            data: { toggle: "modal", target: "#confirmInactivateModal", datetime: frame.datetime, path: planner_available_frame_path(current_planner.id, frame.id)}
+                      - else
+                        = button_tag "有効にする",
+                            class: "available_frame-trigger-btn btn btn-light btn-sm",
+                            type: "button",
+                            data: { toggle: "modal", target: "#confirmActivateModal", datetime: frame.datetime }
 
-#confirmModal.modal.fade tabindex=-1
+#confirmActivateModal.modal.fade tabindex=-1
   .modal-dialog role="document"
     .modal-content
       .modal-header
@@ -41,3 +47,18 @@
             button.btn.btn-secondary type="button" data-dismiss="modal"
               | キャンセル
             = f.submit "OK", class: "btn btn-primary"
+
+#confirmInactivateModal.modal.fade tabindex=-1
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title 確認
+        button.close data-dismiss="modal" aria-label='キャンセル'
+          span aria-hidden="true"
+            | &times;
+      .modal-body
+        p#available_frame-request-confirm-text
+          .modal-footer
+            button.btn.btn-secondary type="button" data-dismiss="modal"
+              | キャンセル
+            = link_to ''
