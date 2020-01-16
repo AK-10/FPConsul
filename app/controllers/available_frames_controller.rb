@@ -6,13 +6,11 @@ class AvailableFramesController < ApplicationController
   def index
     @from = (params[:from]&.in_time_zone || Time.current).change(hour: 0, min: 0, sec: 0)
     to = @from.since(7.days)
-    planner = current_planner
-    @available_frames = planner.available_frames.where(scheduled_time: (@from)..(to))
+    @available_frames = current_planner.available_frames.where(scheduled_time: (@from)..(to))
   end
 
   def create
-    planner = current_planner
-    available_frame = planner.available_frames.build(available_frame_params)
+    available_frame = current_planner.available_frames.build(available_frame_params)
     if available_frame.save
       flash[:success] = "予約枠を追加しました"
       redirect_to action: :index
@@ -23,6 +21,9 @@ class AvailableFramesController < ApplicationController
   end
 
   def destroy
+    available_frame = current_planner.available_frames.find_by(id: params[:id])
+    available_frame.destroy
+    redirect_to action: :index
   end
 
   private
