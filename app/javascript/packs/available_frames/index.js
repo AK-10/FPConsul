@@ -1,5 +1,5 @@
 const setModalContent = (available, datetime) => {
-    const idName = undefined !== avilalble ? 'inactivate-frame-confirm-text' : 'activate-frame-confirm-text'
+    const idName = available ? 'inactivate-frame-confirm-text' : 'activate-frame-confirm-text'
     let paragTag = document.getElementById(idName)
     console.log(paragTag)
 
@@ -13,9 +13,10 @@ const setDatetimeToTextField = datetime => {
      textField.value = datetime
 }
 
-// const setDestroyHref = () => {
-//     setHref =
-// }
+const setDestroyHref = (path) => {
+    let destroyLink = document.getElementById("destroy-frame-link")
+    destroyLink.setAttribute("href", path)
+}
 
 window.onload = () => {
     const triggerButtons = document.getElementsByClassName('available_frame-trigger-btn')
@@ -25,8 +26,12 @@ window.onload = () => {
             console.log(btn.dataset)
             const available = btn.dataset.path !== undefined
             const datetime = btn.dataset.datetime
-            setModalContent(available, datetime)
+            const path = btn.dataset.path
+            setModalContent(available, datetime, path)
             setDatetimeToTextField(datetime)
+            if (available) {
+                setDestroyHref(path)
+            }
         }
     })
 }
