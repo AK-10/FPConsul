@@ -6,10 +6,11 @@ class Reservation < ApplicationRecord
 
   validates :client, presence: true
   validates :available_frame, presence: true, uniqueness: true
-  validate :other_reservation_exists_in_same_time
+  validate :other_reservation_exists_in_same_time, if: [:client, :available_frame]
 
   private
     def other_reservation_exists_in_same_time
+      puts "called other_reservation_exists"
       presence = client.reservations.joins(:available_frame)
         .where(available_frames: { scheduled_time: available_frame.scheduled_time })
         .exists?
