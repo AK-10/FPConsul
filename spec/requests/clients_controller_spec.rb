@@ -38,7 +38,7 @@ RSpec.describe ClientsController, type: :request do
       }
       it do
         is_expected.to eq(422)
-        expect(flash[:danger]).to eq("Email is invalid")
+        expect(flash[:danger]).to eq(["Email is invalid"])
       end
     end
   end
