@@ -45,7 +45,7 @@ RSpec.describe AvailableFramesController, type: :request do
 
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
-        expect(flash[:danger]).to eq("Scheduled time can't be except 0 or 30 minutes")
+        expect(flash[:danger]).to eq(CGI.escapeHTML("Scheduled time can't be except 0 or 30 minutes"))
       end
     end
   end
