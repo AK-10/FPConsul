@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAvailableFrameIdColumnAndRemovePlannerIdColumnAndScheduledTime < ActiveRecord::Migration[5.2]
   def up
     add_reference :reservations, :available_frame, null: false, foreign_key: true, index: { unique: true }
