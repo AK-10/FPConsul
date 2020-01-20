@@ -1,0 +1,5 @@
+- flash.each do |type, msg_array|
+  div class="alert alert-dismissible alert-#{type}"
+    button type="button" class="close" data-dismiss="alert"
+      | &times;
+    p.mb-0 = safe_join(msg_array, tag(:br))

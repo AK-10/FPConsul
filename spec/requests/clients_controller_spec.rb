@@ -25,7 +25,7 @@ RSpec.describe ClientsController, type: :request do
       end
     end
 
-    context "invalid params" do
+    context "invalid email" do
       let(:params) {
         {
           client: {
@@ -38,7 +38,7 @@ RSpec.describe ClientsController, type: :request do
       }
       it do
         is_expected.to eq(422)
-        expect(flash[:danger]).to eq("ユーザー登録に失敗しました.")
+        expect(flash[:danger]).to eq(["Email is invalid"])
       end
     end
   end
