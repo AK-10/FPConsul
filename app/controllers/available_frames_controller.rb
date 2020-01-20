@@ -22,7 +22,12 @@ class AvailableFramesController < ApplicationController
 
   def destroy
     available_frame = current_planner.available_frames.find_by(id: params[:id])
-    available_frame.destroy
+    if available_frame
+      available_frame.destroy
+      flash[:success] = "予約枠を削除しました"
+    else
+      flash[:danger] = "存在しない予約枠です"
+    end
     redirect_to action: :index
   end
 

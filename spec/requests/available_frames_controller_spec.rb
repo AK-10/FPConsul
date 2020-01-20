@@ -49,4 +49,12 @@ RSpec.describe AvailableFramesController, type: :request do
       end
     end
   end
+
+  describe "DELETE /planners/:planner_id/available_frames/:id" do
+    context "valid available_frame id" do
+    end
+
+    context "unknown available_frame id" do
+    end
+  end
 end
