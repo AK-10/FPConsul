@@ -1,9 +1,13 @@
+import moment from "moment"
+
 const setModalContent = (available, datetime) => {
     const idName = available ? 'inactivate-frame-confirm-text' : 'activate-frame-confirm-text'
     let paragTag = document.getElementById(idName)
 
+    // example of datetime -> "2020-01-23T10:30:00.000+09:00"
+    const formattedDate = moment(datetime, "YYYY-MM-DDThh:mm:ss.000+09:00").format("YYYY年MM月DD日 hh時mm分")
     const performText = !available ? "有効" : "無効"
-    paragTag.innerText = `${datetime}の予約枠を${performText}にしますか?`
+    paragTag.innerText = `${formattedDate}の予約枠を${performText}にしますか?`
 }
 
 const setDatetimeToTextField = datetime => {
