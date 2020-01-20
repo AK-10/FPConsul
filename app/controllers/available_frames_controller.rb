@@ -16,7 +16,7 @@ class AvailableFramesController < ApplicationController
     if available_frame.save
       flash[:success] = "予約枠を追加しました"
     else
-      flash[:danger] = available_frame.errors.full_messages.join('<br>').html_safe
+      flash[:danger] = available_frame.errors.full_messages.join("<br>").html_safe
     end
     redirect_to action: :index
   end
