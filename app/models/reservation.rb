@@ -6,5 +6,12 @@ class Reservation < ApplicationRecord
 
   validates :client, presence: true
   validates :available_frame, presence: true, uniqueness: true
-  validates :client_id, uniqueness: { scope: [:available_frame_id] }
+  validate :exists_same_time?
+
+  private
+    def exists_same_time?
+      client.reservations.joins(:available_frame)
+        .where(available_frames: { scheduled_time: available_frame.scheduled_time })
+        .exists?
+    end
 end

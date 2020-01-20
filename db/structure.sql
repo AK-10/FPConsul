@@ -46,7 +46,6 @@ CREATE TABLE `reservations` (
   `available_frame_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_reservations_on_available_frame_id` (`available_frame_id`),
-  UNIQUE KEY `index_reservations_on_client_id_and_available_frame_id` (`client_id`,`available_frame_id`),
   KEY `index_reservations_on_client_id` (`client_id`),
   CONSTRAINT `fk_rails_9c963d6879` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_rails_a1172fd802` FOREIGN KEY (`available_frame_id`) REFERENCES `available_frames` (`id`)
