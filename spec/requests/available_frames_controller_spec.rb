@@ -3,12 +3,14 @@
 require "rails_helper"
 
 RSpec.describe AvailableFramesController, type: :request do
-  let(:planner) { create(:planner) }
-  let(:planner_id) { planner.id }
+  include_context "travel_to_20191218_noon"
 
-  around do |e|
-    travel_to("2019-12-18 12:00:00") { e.run }
+  let(:planner) do
+    create(:planner) do |planner|
+      planner.available_frames.create(scheduled_time: "2019-12-18 13:00:00")
+    end
   end
+  let(:planner_id) { planner.id }
 
   before do
     allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: planner_id })
@@ -51,7 +53,9 @@ RSpec.describe AvailableFramesController, type: :request do
   end
 
   describe "DELETE /planners/:planner_id/available_frames/:id" do
+
     context "valid available_frame id" do
+      let(:id) { planner.available_frames.first.id }
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
         expect(flash[:success]).to eq("予約枠を削除しました")
@@ -59,6 +63,7 @@ RSpec.describe AvailableFramesController, type: :request do
     end
 
     context "unknown available_frame id" do
+      let(:id) { 10000 }
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
         expect(flash[:danger]).to eq("存在しない予約枠です")
