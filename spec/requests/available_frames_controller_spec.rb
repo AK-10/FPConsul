@@ -52,9 +52,17 @@ RSpec.describe AvailableFramesController, type: :request do
 
   describe "DELETE /planners/:planner_id/available_frames/:id" do
     context "valid available_frame id" do
+      it do
+        is_expected.to redirect_to planner_available_frames_path(planner)
+        expect(flash[:success]).to eq("予約枠を削除しました")
+      end
     end
 
     context "unknown available_frame id" do
+      it do
+        is_expected.to redirect_to planner_available_frames_path(planner)
+        expect(flash[:danger]).to eq("存在しない予約枠です")
+      end
     end
   end
 end
