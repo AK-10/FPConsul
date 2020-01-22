@@ -2,6 +2,7 @@
 
 class AvailableFrame < ApplicationRecord
   belongs_to :planner
+  has_one :reservation
 
   validates :planner, presence: true
   validates :scheduled_time, presence: true
