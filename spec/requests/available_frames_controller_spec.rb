@@ -53,7 +53,6 @@ RSpec.describe AvailableFramesController, type: :request do
   end
 
   describe "DELETE /planners/:planner_id/available_frames/:id" do
-
     context "valid available_frame id" do
       let(:id) { planner.available_frames.first.id }
       it do
