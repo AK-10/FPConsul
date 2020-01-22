@@ -26,7 +26,7 @@ RSpec.describe Reservation, type: :model do
         let(:alt_available_frame) { create(:available_frame, scheduled_time: "2019-12-19 13:00:00") }
         let(:reservation) { build(:reservation, client: client, available_frame: available_frame) }
 
-        before { Reservation.create(client: client, available_frame: alt_available_frame) }
+        before { create(:reservation, client: client, available_frame: alt_available_frame) }
 
         it { expect { subject }.to change { reservation.errors[:available_frame] }.from([]).to(["scheduled_time already exists"]) }
       end
