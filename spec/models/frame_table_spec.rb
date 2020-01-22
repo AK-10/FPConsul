@@ -10,9 +10,9 @@ RSpec.describe FrameTable, type: :model do
   let(:planner) { build(:planner) }
   let(:start_day) { Time.current.to_date }
   let(:frames) {
-    [ build(:available_frame, planner: planner, scheduled_time: "2019-12-19 13:00:00".in_time_zone),
-      build(:available_frame, planner: planner, scheduled_time: "2019-12-19 13:30:00".in_time_zone),
-      build(:available_frame, planner: planner, scheduled_time: "2019-12-20 11:30:00".in_time_zone),
+    [ create(:available_frame, planner: planner, scheduled_time: "2019-12-19 13:00:00".in_time_zone),
+      create(:available_frame, planner: planner, scheduled_time: "2019-12-19 13:30:00".in_time_zone),
+      create(:available_frame, planner: planner, scheduled_time: "2019-12-20 11:30:00".in_time_zone),
     ]
   }
 
@@ -28,9 +28,9 @@ RSpec.describe FrameTable, type: :model do
     # 予約枠は正しく入っているか
     context "confirm available_frame at correct block" do
       subject { target.to_matrix }
-      it { expect(subject[6][1].is_available).to eq(true) }
-      it { expect(subject[3][2].is_available).to eq(true) }
-      it { expect(subject[7][1].is_available).to eq(true) }
+      it { expect(subject[6][1].id).to be_present }
+      it { expect(subject[3][2].id).to be_present }
+      it { expect(subject[7][1].id).to be_present }
     end
   end
 end
