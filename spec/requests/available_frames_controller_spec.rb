@@ -62,7 +62,7 @@ RSpec.describe AvailableFramesController, type: :request do
     end
 
     context "unknown available_frame id" do
-      let(:id) { 10000 }
+      let(:id) { AvailableFrame.last.id + 100 }
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
         expect(flash[:danger]).to eq("存在しない予約枠です")
