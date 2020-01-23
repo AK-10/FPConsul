@@ -3,7 +3,7 @@
 class AvailableFrame < ApplicationRecord
   before_destroy do
     if reservation
-      errors.add(:this, "is already reserved")
+      errors.add(:this, "is already reserved by client")
       throw :abort
     end
   end
