@@ -47,9 +47,8 @@ CREATE TABLE `reservations` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_reservations_on_available_frame_id` (`available_frame_id`),
   KEY `index_reservations_on_client_id` (`client_id`),
-  KEY `index_reservations_on_planner_id` (`planner_id`),
-  CONSTRAINT `fk_rails_2e7a5301f5` FOREIGN KEY (`planner_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `fk_rails_9c963d6879` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `fk_rails_9c963d6879` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_rails_a1172fd802` FOREIGN KEY (`available_frame_id`) REFERENCES `available_frames` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `schema_migrations`;
