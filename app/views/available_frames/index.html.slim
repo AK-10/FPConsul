@@ -17,6 +17,8 @@
               th
                 .text-center = range
                 - frames.each do |frame|
+                  / 予約可能枠が既に存在するセルは緑色にする(bg-success)
+
                   td class="#{frame.id ? "bg-success" : nil}"
                     .text-center.frame-cell = frame.id ? "○" : "×"
                     .text-center
