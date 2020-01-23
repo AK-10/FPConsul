@@ -21,7 +21,7 @@ class AvailableFramesController < ApplicationController
 
   def destroy
     begin
-      available_frame = current_planner.available_frames.find(id: params[:id])
+      available_frame = current_planner.available_frames.find(params[:id])
       available_frame.destroy!
       flash[:success] = ["予約枠を削除しました"]
     rescue ActiveRecord::RecordNotFound
