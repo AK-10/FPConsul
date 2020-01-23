@@ -32,7 +32,7 @@ RSpec.describe AvailableFramesController, type: :request do
 
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
-        expect(flash[:success]).to eq("予約枠を追加しました")
+        expect(flash[:success]).to eq(["予約枠を追加しました"])
       end
     end
 
@@ -57,15 +57,26 @@ RSpec.describe AvailableFramesController, type: :request do
       let(:id) { planner.available_frames.first.id }
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
-        expect(flash[:success]).to eq("予約枠を削除しました")
+        expect(flash[:success]).to eq(["予約枠を削除しました"])
+      end
+    end
+
+    context "available_frame which fail destroy validation" do
+      let(:id) { planner.available_frames.first.id }
+      let(:client) { create(:client) }
+      before { create(:reservation, client: client, available_frame_id: id) }
+
+      it do
+        is_expected.to redirect_to planner_available_frames_path(planner)
+        expect(flash[:danger]).to eq(["This is already reserved by client"])
       end
     end
 
     context "unknown available_frame id" do
-      let(:id) { 10000 }
+      let(:id) { AvailableFrame.last.id + 100 }
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
-        expect(flash[:danger]).to eq("存在しない予約枠です")
+        expect(flash[:danger]).to eq(["存在しない予約枠です"])
       end
     end
   end
