@@ -40,13 +40,12 @@ DROP TABLE IF EXISTS `reservations`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `scheduled_time` datetime NOT NULL COMMENT '予約枠の日時(開始時間)',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `client_id` bigint(20) NOT NULL,
-  `planner_id` bigint(20) NOT NULL,
+  `available_frame_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `index_reservations_on_planner_id_and_scheduled_time` (`planner_id`,`scheduled_time`),
+  UNIQUE KEY `index_reservations_on_available_frame_id` (`available_frame_id`),
   KEY `index_reservations_on_client_id` (`client_id`),
   KEY `index_reservations_on_planner_id` (`planner_id`),
   CONSTRAINT `fk_rails_2e7a5301f5` FOREIGN KEY (`planner_id`) REFERENCES `users` (`id`),
@@ -95,6 +94,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20200104150857'),
 ('20200104153924'),
 ('20200104183934'),
-('20200104191239');
+('20200104191239'),
+('20200114012154');
 
 

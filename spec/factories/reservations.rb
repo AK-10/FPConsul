@@ -3,6 +3,5 @@
 FactoryBot.define do
   factory :reservation do
     client
-    planner
   end
 end

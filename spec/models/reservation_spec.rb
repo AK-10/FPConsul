@@ -3,39 +3,46 @@
 require "rails_helper"
 
 RSpec.describe Reservation, type: :model do
+  around do |e|
+    travel_to("2019-12-18 12:00:00") { e.run }
+  end
+
+
   describe "validations" do
-    around do |e|
-      travel_to("2019-12-18 12:00:00") { e.run }
+    it { is_expected.to validate_presence_of(:client) }
+    it { is_expected.to validate_presence_of(:available_frame) }
+
+    context "uniqueness validation" do
+      include_context "reservation_have_already_created"
+      it { is_expected.to validate_uniqueness_of(:available_frame) }
     end
 
-    subject { build(:reservation, scheduled_time: "2019-12-19 13:30:00".to_time) }
-
-    it { is_expected.to validate_presence_of(:client) }
-    it { is_expected.to validate_presence_of(:planner) }
-    it { is_expected.to validate_presence_of(:scheduled_time) }
-    it { is_expected.to validate_uniqueness_of(:planner).scoped_to(:scheduled_time) }
-
-    describe "available frame of planner exist validation" do
+    context "exist same time validation" do
       subject { reservation.valid? }
-      let(:reservation) { build(:reservation, scheduled_time: "2019-12-19 13:30:00".to_time) }
-      let(:planner) { reservation.planner }
 
-      before { create(:available_frame, planner: planner, scheduled_time: scheduled_time) }
+      context "already reserved in the time" do
+        let(:client) { create(:client) }
+        let(:available_frame) { create(:available_frame, scheduled_time: "2019-12-19 13:00:00") }
+        let(:alt_available_frame) { create(:available_frame, scheduled_time: "2019-12-19 13:00:00") }
+        let(:reservation) { build(:reservation, client: client, available_frame: available_frame) }
 
-      context "exist available frame" do
-        let(:scheduled_time) { reservation.scheduled_time }
-        it { expect { subject }.not_to change { reservation.errors[:scheduled_time] } }
+        before { create(:reservation, client: client, available_frame: alt_available_frame) }
+
+        it { expect { subject }.to change { reservation.errors[:available_frame] }.from([]).to(["scheduled_time already exists"]) }
       end
 
-      context "not exist available frame" do
-        let(:scheduled_time) { "2019-12-19 13:00:00".to_time }
-        it { expect { subject }.to change { reservation.errors[:scheduled_time] }.from([]).to(["is unavailable"]) }
+      context "have not reserved not yet in the time" do
+        let(:client) { create(:client) }
+        let(:available_frame) { create(:available_frame, scheduled_time: "2019-12-19 13:00:00") }
+        let(:reservation) { build(:reservation, client: client, available_frame: available_frame) }
+
+        it { expect { subject }.not_to change { reservation.errors[:available_frame] } }
       end
     end
   end
 
   describe "associations" do
     it { is_expected.to belong_to(:client) }
-    it { is_expected.to belong_to(:planner) }
+    it { is_expected.to belong_to(:available_frame) }
   end
 end

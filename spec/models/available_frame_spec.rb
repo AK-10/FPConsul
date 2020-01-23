@@ -17,5 +17,6 @@ RSpec.describe AvailableFrame, type: :model do
 
   describe "associations" do
     it { is_expected.to belong_to(:planner) }
+    it { is_expected.to have_one(:reservation) }
   end
 end
