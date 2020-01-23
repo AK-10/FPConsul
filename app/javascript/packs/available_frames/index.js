@@ -25,10 +25,10 @@ window.onload = () => {
 
     Array.from(triggerButtons).forEach( btn => {
         btn.onclick = () => {
-            console.log(btn.dataset)
             const available = btn.dataset.path !== undefined
             const datetime = btn.dataset.datetime
             const path = btn.dataset.path
+
             setModalContent(available, datetime, path)
             setDatetimeToTextField(datetime)
             if (available) {
