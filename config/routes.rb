@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :available_frames, only: %i(index create destroy)
   end
 
-  namespace :clients do
+  # /clients/available_framesでのアクセスで/clients/showへのアクセスとみなされる
+  # namespace :clients do
+  resources :clients, module: :clients do
     resources :available_frames, only: %i(index)
     resources :reservations, only: %i(new create destroy)
   end
