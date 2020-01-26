@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Clients::ReservationsController < ApplicationController
   before_action :logged_in_as_client?
 
