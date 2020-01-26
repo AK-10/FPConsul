@@ -3,6 +3,7 @@ class Clients::ReservationsController < ApplicationController
 
   def new
     datetime = params[:datetime]
+
     unless datetime
       flash[:danger] = ["時間が指定されていません"]
       redirect_to client_available_frames_path(current_client)
