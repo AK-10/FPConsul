@@ -1,0 +1,11 @@
+/ reserve_button_enabled: 予約ボタンを表示するか
+/ frames: available_frameのarray
+div
+  .d-flex.w-100.justify-content-between
+    h5.mb-1 = frame.client.name
+  p.mb-1 = frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a)")
+
+- if reserve_button_enabled
+  = link_to "予約する",
+      client_reservations_path(current_client, reservation: { available_frame_id: frame.id }),
+      class: "btn btin-primary", method: :post
