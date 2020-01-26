@@ -6,13 +6,14 @@ class ClientsController < ApplicationController
   end
 
   def show
+    binding.pry
   end
 
   def create
     @client = Client.new(client_params)
     if @client.save
       login(@client)
-      redirect_to client_path(@client), flash: { success: "ユーザー登録が完了しました."] }
+      redirect_to client_path(@client), flash: { success: ["ユーザー登録が完了しました."] }
     else
       flash.now[:danger] = @client.errors.full_messages
       render :new, status: :unprocessable_entity

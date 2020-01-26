@@ -17,7 +17,9 @@
               th
                 .text-center = range
                 - frames.each do |frame|
-                  / 予約可能枠が既に存在するセルは緑色にする(bg-success)
+                  / frame.idが存在する = 予約枠が既にセットされている．
+                  / frame削除用のpathを精製する必要があり，それにframe.idを用いている(L31のdata-pathとして渡している)
+                  / jsで削除確認用のモーダル内ボタンのhrefにしている
 
                   td class="#{frame.id ? "bg-success" : nil}"
                     .text-center.frame-cell = frame.id ? "○" : "×"
