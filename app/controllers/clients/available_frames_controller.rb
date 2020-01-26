@@ -6,6 +6,6 @@ class Clients::AvailableFramesController < ApplicationController
   def index
     @from = (params[:from]&.in_time_zone || Time.current).change(hour: 0, min: 0, sec: 0)
     @to = @from.since(7.days)
-    @available_frames = AvailableFrame.where(scheduled_time: (@from)..(@to))
+    @available_frames = AvailableFrame.not_reserved.where(scheduled_time: (@from)..(@to))
   end
 end

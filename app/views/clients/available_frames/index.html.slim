@@ -1,0 +1,28 @@
+.container-fluid
+  .row.mt-5.d-flex.align-item-center
+    .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+      table.table.table-bordered
+        thread
+          tr
+            th scope="col"
+              - date_range(@from.to_date).each do |date|
+                th scope="col"
+                  div.text-center = date.strftime("%Y年 %m月 %d日 (%a)")
+        tbody
+          - time_table(@available_frames, @from.to_date).each do |range, frames|
+            tr
+              th
+                .text-center = range
+                - frames.each do |frame|
+                  / 予約可能枠が既に存在するセルは緑色にする(bg-success)
+
+                  td class="#{frame.id ? "bg-success" : nil}"
+                    .text-center.frame-cell = frame.id ? "○" : "×"
+                    .text-center
+                      - if frame.id
+                        / 予約画面へ
+
+                        = link_to "次へ", "",
+                            class: "btn btn-light btn-sm",
+                            type: "button",
+                            datetime: frame.datetime
