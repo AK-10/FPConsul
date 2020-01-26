@@ -15,4 +15,9 @@ class AvailableFrame < ApplicationRecord
   validates :scheduled_time, presence: true
   validates :scheduled_time, scheduled_time: true, if: :scheduled_time
   validates :planner_id, uniqueness: { scope: [:scheduled_time] }
+
+  scope :not_reserved, -> do
+    eager_load(:reservation)
+      .where(reservations: { available_frame_id: nil })
+  end
 end
