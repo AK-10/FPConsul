@@ -6,7 +6,6 @@ class ClientsController < ApplicationController
   end
 
   def show
-    binding.pry
   end
 
   def create

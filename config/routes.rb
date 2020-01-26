@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :available_frames, only: %i(index create destroy)
   end
 
-  resources :clients, only: [] do
+  namespace :clients do
     resources :available_frames, only: %i(index)
     resources :reservations, only: %i(new create destroy)
   end
