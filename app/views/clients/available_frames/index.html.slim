@@ -20,9 +20,9 @@
                     .text-center.frame-cell = frame.id ? "○" : "×"
                     .text-center
                       - if frame.id
-                        / 予約画面へ
+                        / 予約画面へ, 引数の二つ目にreservations_newのpathを入れる必要あり
 
-                        = link_to "次へ", "",
+                        = link_to "次へ", new_client_reservation(current_client),
                             class: "btn btn-light btn-sm",
                             type: "button",
                             datetime: frame.datetime

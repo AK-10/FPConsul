@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     resources :available_frames, only: %i(index create destroy)
   end
 
+  resources :clients, only: [] do
+    resources :available_frames, only: %i(index)
+    resources :reservations, only: %i(new create destroy)
+  end
+
   scope :user do
     get "/login", to: "sessions#new"
     post "/login", to: "sessions#create"
