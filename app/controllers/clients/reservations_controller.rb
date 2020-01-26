@@ -7,6 +7,7 @@ class Clients::ReservationsController < ApplicationController
       flash[:danger] = ["時間が指定されていません"]
       redirect_to client_available_frames_path(current_client)
     end
+
     @available_frames = AvailableFrame.not_reserved.where(scheduled_time: datetime)
   end
 
@@ -16,7 +17,7 @@ class Clients::ReservationsController < ApplicationController
       time = reservation.available_frame.scheduled_time
       flash[:success] = ["予約しました(#{time.strftime("%Y年 %m月 %d日 (%a) %T")})"]
     else
-      flash[:danger] = reservation.errors.full_messages
+      flash.now[:danger] = reservation.errors.full_messages
     end
 
     redirect_to client_available_frames_path(current_client)

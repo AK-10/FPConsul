@@ -1,3 +1,9 @@
 .container-fluid
   .row.mt-5.d-flex.align-item-center
     .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+      .card.md-3
+        h3.card-header = "予約枠リスト"
+        .card-body
+          ul.list-group.list-group-flush
+            - @available_frames.each do |frame|
+              - render partial: "shared/frame_cell", locals: { frame: frame, reserve_button_enabled: true }
