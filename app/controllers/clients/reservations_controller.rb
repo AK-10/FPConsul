@@ -13,7 +13,7 @@ class Clients::ReservationsController < ApplicationController
   end
 
   def create
-    reservation = current_client.reservations.build(reservation_param)
+    reservation = current_client.reservations.build(reservation_params)
     if reservation.save
       time = reservation.available_frame.scheduled_time
       flash[:success] = ["予約しました(#{time.strftime("%Y年 %m月 %d日 (%a) %T")})"]

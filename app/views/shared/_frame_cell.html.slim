@@ -11,7 +11,7 @@
 
       .col-auto
         - if reserve_button_enabled
-          = link_to "予約する",
+          = button_to "予約する",
               client_reservations_path(current_client),
               class: "btn btn-primary", method: :post,
-              reservation: { available_frame_id: frame.id }
+              params: { reservation: { available_frame_id: frame.id } }
