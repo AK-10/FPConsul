@@ -6,7 +6,7 @@ class Clients::ReservationsController < ApplicationController
 
   def new
     datetime = params[:datetime]
-    @available_frames = AvailableFrame.not_reserved.where(scheduled_time: datetime)
+    @available_frames = AvailableFrame.available.where(scheduled_time: datetime)
   end
 
   def create

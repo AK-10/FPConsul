@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AvailableFrame < ApplicationRecord
-  scope :not_reserved, -> do
+  scope :available, -> do
     left_joins(:reservation)
       .where(reservations: { available_frame_id: nil })
   end

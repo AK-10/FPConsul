@@ -9,6 +9,6 @@ class Clients::AvailableFramesController < ApplicationController
     @scheduled_time_from = start_time.beginning_of_day
     scheduled_time_to = @scheduled_time_from.since(7.days)
 
-    @available_frames = AvailableFrame.not_reserved.where(scheduled_time: (@scheduled_time_from)..(scheduled_time_to))
+    @available_frames = AvailableFrame.available.where(scheduled_time: (@scheduled_time_from)..(scheduled_time_to))
   end
 end
