@@ -13,6 +13,6 @@ class User < ApplicationRecord
   validates :user_type, presence: true, inclusion: { in: user_types.keys }
 
   def show_path
-    "/#{user_type.pluralize}/#{id}"
+    "/#{user_type.pluralize}/home"
   end
 end
