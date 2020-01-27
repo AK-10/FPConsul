@@ -37,7 +37,7 @@ RSpec.describe SessionsController, type: :request do
 
       it do
         is_expected.to eq(401)
-        expect(flash[:alert]).to eq(["emailまたはpasswordが間違えています．"])
+        expect(flash[:alert]).to eq("emailまたはpasswordが間違えています．")
       end
     end
   end

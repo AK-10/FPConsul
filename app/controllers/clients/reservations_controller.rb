@@ -13,7 +13,7 @@ class Clients::ReservationsController < ApplicationController
     reservation = current_client.reservations.build(reservation_params)
     if reservation.save
       reserved_time = reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %T")
-      flash[:success] = ["予約しました(#{reserved_time})"]
+      flash[:success] = "予約しました(#{reserved_time})"
     else
       flash.now[:danger] = reservation.errors.full_messages
     end
@@ -34,7 +34,7 @@ class Clients::ReservationsController < ApplicationController
     def datetime_filter
       return if params[:datetime]
 
-      flash[:danger] = ["時間が指定されていません"]
+      flash[:danger] = "時間が指定されていません"
       redirect_to client_available_frames_path(current_client)
     end
 end

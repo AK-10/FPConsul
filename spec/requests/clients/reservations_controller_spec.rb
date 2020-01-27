@@ -24,7 +24,7 @@ RSpec.describe Clients::AvailableFramesController, type: :request do
     context "not contain datetime parameter" do
       it do
         is_expected.to redirect_to client_available_frames_path(client)
-        expect(flash[:danger]).to eq(["時間が指定されていません"])
+        expect(flash[:danger]).to eq("時間が指定されていません")
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe Clients::AvailableFramesController, type: :request do
 
       it do
         is_expected.to redirect_to client_available_frames_path(client)
-        expect(flash[:success]).to eq(["予約しました(#{available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %T")})"])
+        expect(flash[:success]).to eq("予約しました(#{available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %T")})")
       end
     end
 
