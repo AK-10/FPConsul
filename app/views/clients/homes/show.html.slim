@@ -13,7 +13,8 @@
               .card-body
                 .list-group.list-group-flush
                   - if @reservations.empty?
-                    .list-group-item.text-center = "予約はありません"
+                    .list-group-item
+                      .text-center = "予約はありません"
                   - else
                     - @reservations.each do |reservation|
                       = render partial: "shared/reservation_cell", locals: { reservation: reservation, for_client: true }
