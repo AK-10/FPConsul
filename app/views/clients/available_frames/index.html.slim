@@ -14,15 +14,13 @@
               th
                 .text-center = range
                 - frames.each do |frame|
-                  / 予約可能枠が既に存在するセルは緑色にする(bg-success)
-
                   td class="#{frame.id ? "bg-success" : nil}"
                     .text-center.frame-cell = frame.id ? "○" : "×"
                     .text-center
                       - if frame.id
                         / 予約画面へ, 引数の二つ目にreservations_newのpathを入れる必要あり
 
-                        = link_to "次へ",
+                        = button_to "次へ",
                             new_client_reservation_path(current_client, datetime: frame.datetime),
-                            class: "btn btn-light btn-sm",
+                            class: "btn-light btn-sm",
                             type: "button"
