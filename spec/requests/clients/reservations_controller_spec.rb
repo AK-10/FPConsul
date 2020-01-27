@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Clients::AvailableFramesController, type: :request do
+RSpec.describe Clients::ReservationsController, type: :request do
   include_context "travel_to_20191218_noon"
 
   let(:client) { create(:client) }
@@ -22,7 +22,7 @@ RSpec.describe Clients::AvailableFramesController, type: :request do
     end
 
     context "not contain datetime parameter" do
-      it do
+      it "is expected to fail to get available_frames" do
         is_expected.to redirect_to client_available_frames_path(client)
         expect(flash[:danger]).to eq("時間が指定されていません")
       end
@@ -42,7 +42,7 @@ RSpec.describe Clients::AvailableFramesController, type: :request do
         }
       }
 
-      it do
+      it "is expected to success reserving" do
         is_expected.to redirect_to client_available_frames_path(client)
         expect(flash[:success]).to eq("予約しました(#{available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %T")})")
       end
@@ -60,7 +60,7 @@ RSpec.describe Clients::AvailableFramesController, type: :request do
         }
       }
 
-      it do
+      it "is expected to fail reserving" do
         is_expected.to redirect_to client_available_frames_path(client)
         expect(flash[:danger]).to eq(["Available frame must exist", "Available frame can't be blank"])
       end
@@ -87,7 +87,7 @@ RSpec.describe Clients::AvailableFramesController, type: :request do
         }
       }
 
-      it do
+      it "is expected to fail reserving" do
         is_expected.to redirect_to client_available_frames_path(client)
         expect(flash[:danger]).to eq(["Available frame scheduled_time already exists"])
       end
