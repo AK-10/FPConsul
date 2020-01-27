@@ -20,7 +20,6 @@
                       - if frame.id
                         / 予約画面へ, 引数の二つ目にreservations_newのpathを入れる必要あり
 
-                        = button_to "次へ",
-                            new_client_reservation_path(current_client, datetime: frame.datetime),
-                            class: "btn-light btn-sm",
-                            type: "button"
+                        = link_to "次へ",
+                          new_client_reservation_path(current_client, datetime: frame.datetime),
+                          class: "btn btn-light btn-sm"
