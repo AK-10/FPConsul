@@ -2,15 +2,10 @@
 
 class Clients::ReservationsController < ApplicationController
   before_action :logged_in_as_client?
+  before_action :datetime_filter, only: %i(new)
 
   def new
     datetime = params[:datetime]
-
-    unless datetime
-      flash[:danger] = ["時間が指定されていません"]
-      redirect_to client_available_frames_path(current_client)
-    end
-
     @available_frames = AvailableFrame.not_reserved.where(scheduled_time: datetime)
   end
 
@@ -34,5 +29,12 @@ class Clients::ReservationsController < ApplicationController
       params.require(:reservation).permit(
         :available_frame_id
       )
+    end
+
+    def datetime_filter
+      return if params[:datetime]
+
+      flash[:danger] = ["時間が指定されていません"]
+      redirect_to client_available_frames_path(current_client)
     end
 end
