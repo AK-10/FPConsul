@@ -71,8 +71,8 @@ RSpec.describe Clients::AvailableFramesController, type: :request do
       # 一つのclientで二つとも予約しようとする
       before do
         create(:planner) do |planner|
-          af = create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00")
-          create(:reservation, available_frame: af, client: client)
+          available_frame = create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00")
+          create(:reservation, available_frame: available_frame, client: client)
         end
       end
 
