@@ -3,12 +3,14 @@
 require "rails_helper"
 
 RSpec.describe AvailableFramesController, type: :request do
-  let(:planner) { create(:planner) }
-  let(:planner_id) { planner.id }
+  include_context "travel_to_20191218_noon"
 
-  around do |e|
-    travel_to("2019-12-18 12:00:00") { e.run }
+  let(:planner) do
+    create(:planner) do |planner|
+      planner.available_frames.create(scheduled_time: "2019-12-18 13:00:00")
+    end
   end
+  let(:planner_id) { planner.id }
 
   before do
     allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: planner_id })
@@ -30,7 +32,7 @@ RSpec.describe AvailableFramesController, type: :request do
 
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
-        expect(flash[:success]).to eq("予約枠を追加しました")
+        expect(flash[:success]).to eq(["予約枠を追加しました"])
       end
     end
 
@@ -46,6 +48,35 @@ RSpec.describe AvailableFramesController, type: :request do
       it do
         is_expected.to redirect_to planner_available_frames_path(planner)
         expect(flash[:danger]).to eq(["Scheduled time can't be except 0 or 30 minutes"])
+      end
+    end
+  end
+
+  describe "DELETE /planners/:planner_id/available_frames/:id" do
+    context "valid available_frame id" do
+      let(:id) { planner.available_frames.first.id }
+      it do
+        is_expected.to redirect_to planner_available_frames_path(planner)
+        expect(flash[:success]).to eq(["予約枠を削除しました"])
+      end
+    end
+
+    context "available_frame which fail destroy validation" do
+      let(:id) { planner.available_frames.first.id }
+      let(:client) { create(:client) }
+      before { create(:reservation, client: client, available_frame_id: id) }
+
+      it do
+        is_expected.to redirect_to planner_available_frames_path(planner)
+        expect(flash[:danger]).to eq(["This is already reserved by client"])
+      end
+    end
+
+    context "unknown available_frame id" do
+      let(:id) { AvailableFrame.last.id + 100 }
+      it do
+        is_expected.to redirect_to planner_available_frames_path(planner)
+        expect(flash[:danger]).to eq(["存在しない予約枠です"])
       end
     end
   end

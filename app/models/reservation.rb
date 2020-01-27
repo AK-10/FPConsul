@@ -10,7 +10,7 @@ class Reservation < ApplicationRecord
 
   validates :client, presence: true
   validates :available_frame, presence: true, uniqueness: true
-  validate :other_reservation_exists_in_same_time, if: [:client, :available_frame]
+  validate :other_reservation_exists_in_same_time, if: [:client, :available_frame], on: :create
 
   private
     def other_reservation_exists_in_same_time

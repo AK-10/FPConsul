@@ -16,14 +16,14 @@ class FrameTable
     # 予約可能枠を当てはめる必要があるため,いきなり二次元配列にしない(二次元配列にすると探索が面倒)
     base_cells = FrameTable.start_times.flat_map do |start_time|
       FrameTable.date_range(start_day).map do |day|
-        OpenStruct.new(datetime: start_time.on(day), time: start_time, is_available: false)
+        OpenStruct.new(datetime: start_time.on(day), time: start_time, id: nil)
       end
     end
 
     # plannerが設定した予約枠を入れ込む
     frames.each do |frame|
       cell = base_cells.find { |element| frame.scheduled_time == element.datetime }
-      cell.is_available = true
+      cell.id = frame.id
     end
 
     # timeでグループ化し，valuesをとることで二次元配列にする
