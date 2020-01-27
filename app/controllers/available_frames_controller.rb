@@ -26,8 +26,8 @@ class AvailableFramesController < ApplicationController
       flash[:success] = ["予約枠を削除しました"]
     rescue ActiveRecord::RecordNotFound
       flash[:danger] = ["存在しない予約枠です"]
-    rescue ActiveRecord::RecordNotDestroyed
-      flash[:danger] = available_frame.errors.full_messages
+    rescue ActiveRecord::RecordNotDestroyed => err
+      flash[:danger] = err.record.errors.full_messages
     end
     redirect_to action: :index
   end
