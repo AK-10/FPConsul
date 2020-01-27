@@ -2,7 +2,7 @@
 
 class AvailableFrame < ApplicationRecord
   scope :not_reserved, -> do
-    eager_load(:reservation)
+    left_joins(:reservation)
       .where(reservations: { available_frame_id: nil })
   end
 
