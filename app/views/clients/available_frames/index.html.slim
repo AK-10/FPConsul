@@ -5,7 +5,7 @@
         thread
           tr
             th scope="col"
-              - date_range(@from.to_date).each do |date|
+              - date_range(@scheduled_time_from.to_date).each do |date|
                 th scope="col"
                   div.text-center = date.strftime("%Y年 %m月 %d日 (%a)")
         tbody
