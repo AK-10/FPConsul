@@ -1,0 +1,21 @@
+/ for_planner: plannerの画面で使う時true
+/ for_client: clientの画面で使う時true
+/ reservation: 予約
+/ 使うときはlist-groupクラスでラップする
+.list-group-item.list-group-item-action.flex-column.align-items-start
+  .container
+    .row
+      .col-auto.mr-auto
+        .d-flex.w-100.justify-content-between
+          - if for_planner
+            h5.mb-1 = reservation.client.name
+          - elsif for_client
+            h5.mb-1 = reservation.planner.name
+        p.mb-1 = reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a)")
+
+      .col-auto
+        - if for_client
+          = button_to "取り消す",
+              clients_reservations_path(current_client, reservation.id),
+              class: "btn btn-primary", method: :delete
+
