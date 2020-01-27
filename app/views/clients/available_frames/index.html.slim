@@ -9,7 +9,7 @@
                 th scope="col"
                   div.text-center = date.strftime("%Y年 %m月 %d日 (%a)")
         tbody
-          - time_table(@available_frames, @from.to_date).each do |range, frames|
+          - time_table(@available_frames, @scheduled_time_from.to_date).each do |range, frames|
             tr
               th
                 .text-center = range
