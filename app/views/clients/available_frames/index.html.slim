@@ -17,9 +17,10 @@
                   td class="#{frame.id ? "bg-success" : nil}"
                     .text-center.frame-cell = frame.id ? "○" : "×"
                     .text-center
-                      - if frame.id
-                        / 予約画面へ, 引数の二つ目にreservations_newのpathを入れる必要あり
+                      / frame.idが存在する場合，有効な予約枠がある
+                      / ない場合予約画面へ遷移させたくないので，何もしない
 
+                      - if frame.id
                         = link_to "次へ",
                           new_client_reservation_path(current_client, datetime: frame.datetime),
                           class: "btn btn-light btn-sm"
