@@ -22,6 +22,15 @@ class Clients::ReservationsController < ApplicationController
   end
 
   def destroy
+    reservation = current_client.reservations.find(params[:id])
+    reservation.destroy!
+    flash[:success] = "予約を削除しました"
+  rescue ActiveRecord::RecordNotFound
+    flash.now[:danger] = "存在しない予約です"
+  rescue ActiveRecord::RecordNotDestroyed => err
+    flash.now[:danger] = err.record.errors.full_messages
+  ensure
+    redirect_to clients_home_path
   end
 
   private

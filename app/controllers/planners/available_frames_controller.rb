@@ -20,15 +20,14 @@ class Planners::AvailableFramesController < ApplicationController
   end
 
   def destroy
-    begin
-      available_frame = current_planner.available_frames.find(params[:id])
-      available_frame.destroy!
-      flash[:success] = "予約枠を削除しました"
-    rescue ActiveRecord::RecordNotFound
-      flash[:danger] = "存在しない予約枠です"
-    rescue ActiveRecord::RecordNotDestroyed => err
-      flash[:danger] = err.record.errors.full_messages
-    end
+    available_frame = current_planner.available_frames.find(params[:id])
+    available_frame.destroy!
+    flash[:success] = "予約枠を削除しました"
+  rescue ActiveRecord::RecordNotFound
+    flash.now[:danger] = "存在しない予約枠です"
+  rescue ActiveRecord::RecordNotDestroyed => err
+    flash.now[:danger] = err.record.errors.full_messages
+  ensure
     redirect_to action: :index
   end
 
