@@ -36,4 +36,5 @@
           | キャンセル
         = button_to "OK",
             clients_reservation_path(reservation.id),
+            method: :delete,
             class: "btn btn-primary"
