@@ -28,7 +28,7 @@
                         = button_tag "無効にする",
                             class: "available_frame-trigger-btn btn btn-light btn-sm",
                             type: "button",
-                            data: { toggle: "modal", target: "#confirmInactivateModal", datetime: frame.datetime, path: planner_available_frame_path(current_planner.id, frame.id)}
+                            data: { toggle: "modal", target: "#confirmInactivateModal", datetime: frame.datetime, path: planners_available_frame_path(frame.id)}
                       - else
                         = button_tag "有効にする",
                             class: "available_frame-trigger-btn btn btn-light btn-sm",
@@ -45,7 +45,7 @@
             | &times;
       .modal-body
         p#activate-frame-confirm-text
-        = form_with(model: AvailableFrame.new, local: true, url: planner_available_frames_path) do |f|
+        = form_with(model: AvailableFrame.new, local: true, url: planners_available_frames_path) do |f|
           = f.text_field :scheduled_time, id: "available_frame-scheduled_time", class: "d-none"
           .modal-footer
             button.btn.btn-secondary type="button" data-dismiss="modal"
