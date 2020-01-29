@@ -1,6 +1,5 @@
-nav.navbar.navbar-expand-lg.navbar-dark.bg-info
-  a.navbar-brand href="#"
-    | FPConsul
+nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+  div.navbar-brand = "FPConsul"
   button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     span.navbar-toggler-icon
 
@@ -10,5 +9,17 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-info
         a.nav-link href="#"
           | Home
     .form-inline.my-2.my-lg-0
-      button.btn.btn-warning.my-2.my-sm-0 type="submit"
-        | ログイン
+      - if logged_in?
+        = link_to "ログアウト", "/user/logout",
+            method: :delete,
+            class: "btn btn-warning my-2 my-sm-0"
+      - else
+        .nav-item.dropdown.mr-4.my-2.my-sm-0
+          a.nav-link.dropdown-toggle.btn.btn-warning.btn-sm data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+            | 新規作成
+          .dropdown-menu
+            a.dropdown-item href="#" = "クライアントとして作成"
+            a.dropdown-item href="#" = "プランナーとして作成"
+        .nav-item
+          = link_to "ログイン", "/user/login",
+            class: "btn btn-warning my-2 my-sm-0"
