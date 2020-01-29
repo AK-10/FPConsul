@@ -32,7 +32,8 @@
           li = "プランナー: #{reservation.available_frame.planner.name}"
           li = "予約時間: #{reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %H:%M")}"
       .modal-footer
-        button.btn.btn-secondary type="button" data-dismiss="modal" = "キャンセル"
-          = button_to "OK",
-              clients_reservation_path(reservation.id),
-              class: "btn btn-primary"
+        button.btn.btn-secondary type="button" data-dismiss="modal"
+          | キャンセル
+        = button_to "OK",
+            clients_reservation_path(reservation.id),
+            class: "btn btn-primary"
