@@ -9,8 +9,9 @@ Rails.application.routes.draw do
     resources :planners, only: %i(new create edit update)
   end
 
-  resources :planners, only: [] do
+  namespace :planners do
     resources :available_frames, only: %i(index create destroy)
+    resource :home, only: %i(show)
   end
 
   namespace :clients do
