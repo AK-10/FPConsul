@@ -11,10 +11,10 @@
               h5.mb-1 = reservation.client.name
           - elsif current_user.client?
               h5.mb-1 = reservation.available_frame.planner.name
-        p.mb-1 = reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a)")
+        p.mb-1 = reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %H:%M")
 
       .col-auto
         - if current_user.client?
           = button_to "取り消す",
-              clients_reservations_path(current_client, reservation.id),
-              class: "btn btn-primary", method: :delete
+              clients_reservation_path(reservation.id),
+              class: "btn btn-danger", method: :delete
