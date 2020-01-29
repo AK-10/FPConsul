@@ -12,7 +12,7 @@ class AvailableFramesController < ApplicationController
   def create
     available_frame = current_planner.available_frames.build(available_frame_params)
     if available_frame.save
-      flash[:success] = ["予約枠を追加しました"]
+      flash[:success] = "予約枠を追加しました"
     else
       flash[:danger] = available_frame.errors.full_messages
     end
@@ -23,9 +23,9 @@ class AvailableFramesController < ApplicationController
     begin
       available_frame = current_planner.available_frames.find(params[:id])
       available_frame.destroy!
-      flash[:success] = ["予約枠を削除しました"]
+      flash[:success] = "予約枠を削除しました"
     rescue ActiveRecord::RecordNotFound
-      flash[:danger] = ["存在しない予約枠です"]
+      flash[:danger] = "存在しない予約枠です"
     rescue ActiveRecord::RecordNotDestroyed => err
       flash[:danger] = err.record.errors.full_messages
     end
