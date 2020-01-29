@@ -92,4 +92,27 @@ RSpec.describe Clients::ReservationsController, type: :request do
       end
     end
   end
+
+  describe "DELETE /clients/reservations/:reservation_id" do
+    context "valid reservation id" do
+      let(:planner) { create(:planner) }
+      let(:available_frame) { create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00") }
+      let(:reservation) { create(:reservation, client: client, available_frame: available_frame) }
+      let(:reservation_id) { reservation.id }
+
+      it "is expected to success" do
+        is_expected.to redirect_to clients_home_path
+        expect(flash[:success]).to eq("予約を削除しました")
+      end
+    end
+
+    context "unkown reservation id" do
+      let(:reservation_id) { Reservation.last&.id || 1 }
+
+      it "is expected to fail because reservation not found" do
+        is_expected.to redirect_to clients_home_path
+        expect(flash[:danger]).to eq("存在しない予約です")
+      end
+    end
+  end
 end
