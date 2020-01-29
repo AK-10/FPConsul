@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 class AvailableFrame < ApplicationRecord
-  scope :available, -> do
-    left_joins(:reservation)
-      .where(reservations: { available_frame_id: nil })
-  end
-
   before_destroy :prevent_destroy_if_reservation_exist
 
   belongs_to :planner
