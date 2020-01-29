@@ -6,8 +6,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
   #navbarColor2.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
       li.nav-item
-        a.nav-link href="#"
-          | Home
+        - if logged_in?
+          = link_to "Home", current_user.show_path, class: "nav-link"
     .form-inline.my-2.my-lg-0
       - if logged_in?
         = link_to "ログアウト", "/user/logout",
