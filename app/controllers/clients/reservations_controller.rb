@@ -2,7 +2,7 @@
 
 class Clients::ReservationsController < ApplicationController
   before_action :logged_in_as_client?
-  before_action :datetime_filter, only: %i(new)
+  before_action :redirect_unless_datetime_params, only: %i(new)
 
   def new
     datetime = params[:datetime]
@@ -31,7 +31,7 @@ class Clients::ReservationsController < ApplicationController
       )
     end
 
-    def datetime_filter
+    def redirect_unless_datetime_params
       return if params[:datetime]
 
       flash[:danger] = "時間が指定されていません"

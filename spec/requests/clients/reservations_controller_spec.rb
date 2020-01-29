@@ -34,13 +34,13 @@ RSpec.describe Clients::ReservationsController, type: :request do
       let(:planner) { create(:planner) }
       let(:available_frame) { planner.available_frames.create(scheduled_time: "2019-12-18 13:00:00") }
 
-      let(:params) {
+      let(:params) do
         {
           reservation: {
             available_frame_id: available_frame.id
           }
         }
-      }
+      end
 
       it "is expected to success reserving" do
         is_expected.to redirect_to clients_available_frames_path(client)
@@ -52,13 +52,13 @@ RSpec.describe Clients::ReservationsController, type: :request do
       let(:available_frame_id) do
         AvailableFrame.last&.id || 1
       end
-      let(:params) {
+      let(:params) do
         {
           reservation: {
             available_frame_id: available_frame_id
           }
         }
-      }
+      end
 
       it "is expected to fail reserving" do
         is_expected.to redirect_to clients_available_frames_path(client)
@@ -70,22 +70,21 @@ RSpec.describe Clients::ReservationsController, type: :request do
       # 同じ時間のavailable_frameを2つ作る
       # 一つのclientで二つとも予約しようとする
       before do
-        create(:planner) do |planner|
-          available_frame = create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00")
-          create(:reservation, available_frame: available_frame, client: client)
-        end
+        planner = create(:planner)
+        available_frame = create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00")
+        create(:reservation, available_frame: available_frame, client: client)
       end
 
       let(:planner) { create(:planner) }
       let(:available_frame) { planner.available_frames.create(scheduled_time: "2019-12-18 13:00:00") }
 
-      let(:params) {
+      let(:params) do
         {
           reservation: {
             available_frame_id: available_frame.id
           }
         }
-      }
+      end
 
       it "is expected to fail reserving" do
         is_expected.to redirect_to clients_available_frames_path(client)
