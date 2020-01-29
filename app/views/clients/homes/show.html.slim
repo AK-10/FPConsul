@@ -17,4 +17,4 @@
                       .text-center = "予約はありません"
                   - else
                     - @reservations.each do |reservation|
-                      = render partial: "shared/reservation_cell", locals: { reservation: reservation, for_client: true }
+                      = render partial: "shared/reservation_cell", locals: { reservation: reservation }

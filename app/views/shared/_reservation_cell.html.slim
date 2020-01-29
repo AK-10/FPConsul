@@ -7,14 +7,14 @@
     .row
       .col-auto.mr-auto
         .d-flex.w-100.justify-content-between
-          - if for_planner
-            h5.mb-1 = reservation.client.name
-          - elsif for_client
-            h5.mb-1 = reservation.planner.name
+          - if current_user.planner?
+              h5.mb-1 = reservation.client.name
+          - elsif current_user.client?
+              h5.mb-1 = reservation.available_frame.planner.name
         p.mb-1 = reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a)")
 
       .col-auto
-        - if for_client
+        - if current_user.client?
           = button_to "取り消す",
               clients_reservations_path(current_client, reservation.id),
               class: "btn btn-primary", method: :delete
