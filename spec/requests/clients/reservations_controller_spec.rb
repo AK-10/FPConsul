@@ -70,10 +70,9 @@ RSpec.describe Clients::ReservationsController, type: :request do
       # 同じ時間のavailable_frameを2つ作る
       # 一つのclientで二つとも予約しようとする
       before do
-        create(:planner) do |planner|
-          available_frame = create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00")
-          create(:reservation, available_frame: available_frame, client: client)
-        end
+        planner = create(:planner)
+        available_frame = create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00")
+        create(:reservation, available_frame: available_frame, client: client)
       end
 
       let(:planner) { create(:planner) }
