@@ -7,7 +7,7 @@ module AvailableFramesHelper
     step_min = 30.minutes
     FrameTable.start_times.map do |start_time|
       end_time = start_time + step_min
-      "#{start_time.strftime("%H:%M")} ~ #{end_time.strftime("%H:%M")}"
+      "#{start_time} ~ #{end_time}"
     end
   end
 
