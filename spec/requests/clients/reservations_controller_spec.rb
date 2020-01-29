@@ -34,13 +34,13 @@ RSpec.describe Clients::ReservationsController, type: :request do
       let(:planner) { create(:planner) }
       let(:available_frame) { planner.available_frames.create(scheduled_time: "2019-12-18 13:00:00") }
 
-      let(:params) {
+      let(:params) do
         {
           reservation: {
             available_frame_id: available_frame.id
           }
         }
-      }
+      end
 
       it "is expected to success reserving" do
         is_expected.to redirect_to client_available_frames_path(client)
@@ -52,13 +52,13 @@ RSpec.describe Clients::ReservationsController, type: :request do
       let(:available_frame_id) do
         AvailableFrame.last&.id || 1
       end
-      let(:params) {
+      let(:params) do
         {
           reservation: {
             available_frame_id: available_frame_id
           }
         }
-      }
+      end
 
       it "is expected to fail reserving" do
         is_expected.to redirect_to client_available_frames_path(client)
@@ -78,13 +78,13 @@ RSpec.describe Clients::ReservationsController, type: :request do
       let(:planner) { create(:planner) }
       let(:available_frame) { planner.available_frames.create(scheduled_time: "2019-12-18 13:00:00") }
 
-      let(:params) {
+      let(:params) do
         {
           reservation: {
             available_frame_id: available_frame.id
           }
         }
-      }
+      end
 
       it "is expected to fail reserving" do
         is_expected.to redirect_to client_available_frames_path(client)
