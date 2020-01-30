@@ -7,7 +7,7 @@
       .col-auto.mr-auto
         .d-flex.w-100.justify-content-between
           h5.mb-1 = frame.planner.name
-        p.mb-1 = frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a)")
+        p.mb-1 = frame.formatted_scheduled_time
 
       .col-auto
         - if reserve_button_enabled
