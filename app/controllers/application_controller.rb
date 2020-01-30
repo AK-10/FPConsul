@@ -53,4 +53,5 @@ class ApplicationController < ActionController::Base
       redirect_to current_user.show_path
     end
   end
+
 end

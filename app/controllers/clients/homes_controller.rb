@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Clients::HomesController < ApplicationController
-  before_action :logged_in_as_client?
+  before_action :client_login_required
 
   def show
     @reservations = current_client.reservations
