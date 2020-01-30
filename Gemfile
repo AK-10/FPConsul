@@ -27,7 +27,6 @@ gem 'slim-rails'
 gem 'webpacker'
 gem 'tod'
 gem 'active_decorator'
-gem 'active_decorator-rspec'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
