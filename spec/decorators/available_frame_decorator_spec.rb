@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe AvailableFrameDecorator do
   include_context "travel_to_20191218_noon"
@@ -16,7 +16,7 @@ RSpec.describe AvailableFrameDecorator do
 
     context "past, appearing (終了)" do
       let(:available_frame) { build(:available_frame, scheduled_time: "2019-12-17 12:30:00") }
-      it{ is_expected.to eq("2019年 12月 17日 (Tue) 12:30 ~ 13:00(終了)") }
+      it { is_expected.to eq("2019年 12月 17日 (Tue) 12:30 ~ 13:00(終了)") }
     end
   end
 end
