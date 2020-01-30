@@ -3,7 +3,8 @@
 class AvailableFrame < ApplicationRecord
   scope :available, -> do
     left_joins(:reservation)
-      .where(scheduled_time: Time.current...DateTime::Infinity.new, reservations: { available_frame_id: nil })
+      .where(scheduled_time: Time.current...DateTime::Infinity.new)
+      .where(reservations: { available_frame_id: nil })
   end
 
   before_destroy :prevent_destroy_if_reservation_exist
