@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Clients::ReservationsController < ApplicationController
-  before_action :client_login_required
+  include ClientConcern
+
+  before_action :require_client_login!
   before_action :redirect_unless_datetime_params, only: %i(new)
 
   def new

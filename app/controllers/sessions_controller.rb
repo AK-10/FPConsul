@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  before_action :redirect_to_show, only: %i(new)
+  include SessionConcern
+
+  before_action :redirect_to_home, only: %i(new)
 
   def new
   end
@@ -11,7 +13,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(session_params[:password])
       login(user)
       flash[:info] = "ログインしました"
-      redirect_to_show
+      redirect_to_home
     else
       flash.now[:alert] = "emailまたはpasswordが間違えています．"
       render :new, status: :unauthorized
@@ -30,12 +32,6 @@ class SessionsController < ApplicationController
         :email,
         :password,
       )
-    end
-
-    def redirect_to_show
-      # インスタンスを引数に渡しても期待するpathが得られない
-      # (/(clients|planners)/:id にならない)
-      redirect_to current_user.show_path if logged_in?
     end
 
     def logout
