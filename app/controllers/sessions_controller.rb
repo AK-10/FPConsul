@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  before_action :redirect_to_show, only: %i(new)
+  before_action :redirect_to_home, only: %i(new)
 
   def new
   end
@@ -30,12 +30,6 @@ class SessionsController < ApplicationController
         :email,
         :password,
       )
-    end
-
-    def redirect_to_show
-      # インスタンスを引数に渡しても期待するpathが得られない
-      # (/(clients|planners)/:id にならない)
-      redirect_to current_user.show_path if logged_in?
     end
 
     def logout

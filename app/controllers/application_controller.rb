@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
     login_required
     if logged_in_as_planner?
       flash[:warning] = "プランナーユーザのアクセスは許可されていません"
-      redirect_to current_user.show_path
+      redirect_to current_user.home_path
     end
   end
 
@@ -50,8 +50,13 @@ class ApplicationController < ActionController::Base
     login_required
     if logged_in_as_client?
       flash[:warning] = "クライアントユーザのアクセスは許可されていません"
-      redirect_to current_user.show_path
+      redirect_to current_user.home_path
     end
   end
 
+  def redirect_to_home
+    # インスタンスを引数に渡しても期待するpathが得られない
+    # (/(clients|planners)/:id にならない)
+    redirect_to current_user.home_path if logged_in?
+  end
 end
