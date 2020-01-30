@@ -40,16 +40,16 @@ class ApplicationController < ActionController::Base
 
   def client_login_required
     login_required
-    unless logged_in_as_client?
-      flash[:warning] = "クライアントユーザのアクセスは許可されていません"
+    if logged_in_as_planner?
+      flash[:warning] = "プランナーユーザのアクセスは許可されていません"
       redirect_to current_user.show_path
     end
   end
 
   def planner_login_required
     login_required
-    unless logged_in_as_planner?
-      flash[:warning] = "プランナーユーザのアクセスは許可されていません"
+    if logged_in_as_client?
+      flash[:warning] = "クライアントユーザのアクセスは許可されていません"
       redirect_to current_user.show_path
     end
   end
