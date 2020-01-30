@@ -20,6 +20,7 @@ class Reservation < ApplicationRecord
     end
 
     def verify_available_frame
-      available_frame.errors.full_messages.map { |err| errors.add(:available_frame, err) } unless available_frame.valid?
+      return if available_frame.valid?
+      available_frame.errors.full_messages.each { |err| errors.add(:available_frame, err) }
     end
 end
