@@ -6,9 +6,9 @@
       .col-auto.mr-auto
         .d-flex.w-100.justify-content-between
           - if current_user.planner?
-              h5.mb-1 = reservation.client.name
+            h5.mb-1 = reservation.client.name
           - elsif current_user.client?
-              h5.mb-1 = reservation.available_frame.planner.name
+            h5.mb-1 = reservation.available_frame.planner.name
         p.mb-1 = reservation.available_frame.formatted_scheduled_time
 
       .col-auto
