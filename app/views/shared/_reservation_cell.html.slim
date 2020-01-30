@@ -9,7 +9,7 @@
               h5.mb-1 = reservation.client.name
           - elsif current_user.client?
               h5.mb-1 = reservation.available_frame.planner.name
-        p.mb-1 = reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %H:%M")
+        p.mb-1 = reservation.available_frame.formatted_scheduled_time
 
       .col-auto
         - if current_user.client?
