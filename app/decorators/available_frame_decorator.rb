@@ -14,6 +14,6 @@ module AvailableFrameDecorator
     end_time_format_string = end_time.strftime("%H:%M")
 
     finished = scheduled_time < Time.current ? "(終了)" : ""
-    "#{scheduled_date_format_string} #{start_time_format_string} #{end_time_format_string}#{finished}"
+    "#{scheduled_date_format_string} #{start_time_format_string} ~ #{end_time_format_string}#{finished}"
   end
 end
