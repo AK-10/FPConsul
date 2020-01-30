@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Planners::AvailableFramesController < ApplicationController
+  include PlannerConcern
+
   before_action :require_planner_login!
 
   def index

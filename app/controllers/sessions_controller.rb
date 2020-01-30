@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  include SessionConcern
+
   before_action :redirect_to_home, only: %i(new)
 
   def new

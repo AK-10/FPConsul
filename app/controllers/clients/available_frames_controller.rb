@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Clients::AvailableFramesController < ApplicationController
+  include ClientConcern
+
   before_action :require_client_login!
 
   def index

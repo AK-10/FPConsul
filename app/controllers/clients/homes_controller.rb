@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Clients::HomesController < ApplicationController
+  include ClientConcern
+
   before_action :require_client_login!
 
   def show
