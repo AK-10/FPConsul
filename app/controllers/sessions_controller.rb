@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(session_params[:password])
       login(user)
       flash[:info] = "ログインしました"
-      redirect_to_show
+      redirect_to_home
     else
       flash.now[:alert] = "emailまたはpasswordが間違えています．"
       render :new, status: :unauthorized

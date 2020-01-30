@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, length: { maximum: 100 }, format: { with: ValidFormat::EMAIL_FORMAT }
   validates :user_type, presence: true, inclusion: { in: user_types.keys }
 
-  def show_path
+  def home_path
     "/#{user_type.pluralize}/home"
   end
 end

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PlannersController < ApplicationController
+  before_action :redirect_to_home, only: :new
+
   def new
     @planner = Planner.new
   end
