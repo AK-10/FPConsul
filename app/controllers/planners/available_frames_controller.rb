@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Planners::AvailableFramesController < ApplicationController
-  before_action :planner_login_required
+  before_action :require_planner_login!
 
   def index
     @from = (params[:from]&.in_time_zone || Time.current).change(hour: 0, min: 0, sec: 0)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Clients::AvailableFramesController < ApplicationController
-  before_action :client_login_required
+  before_action :require_client_login!
 
   def index
     start_time = (params[:from]&.in_time_zone || Time.current) rescue Time.current

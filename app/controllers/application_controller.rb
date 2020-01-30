@@ -31,23 +31,23 @@ class ApplicationController < ActionController::Base
     !!current_planner
   end
 
-  def login_required
+  def require_login!
     unless logged_in?
       flash[:warning] = "ログインしてください"
       redirect_to "/user/login"
     end
   end
 
-  def client_login_required
-    login_required
+  def require_client_login!
+    require_login!
     if logged_in_as_planner?
       flash[:warning] = "プランナーユーザのアクセスは許可されていません"
       redirect_to current_user.home_path
     end
   end
 
-  def planner_login_required
-    login_required
+  def require_planner_login!
+    require_login!
     if logged_in_as_client?
       flash[:warning] = "クライアントユーザのアクセスは許可されていません"
       redirect_to current_user.home_path

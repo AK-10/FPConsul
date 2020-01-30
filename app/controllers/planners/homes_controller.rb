@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Planners::HomesController < ApplicationController
-  before_action :planner_login_required
+  before_action :require_planner_login!
 
   def show
     @reservations = current_planner.reservations
