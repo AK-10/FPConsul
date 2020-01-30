@@ -30,7 +30,7 @@
         p#activate-frame-confirm-text = "以下の予約を取り消します."
         ul
           li = "プランナー: #{reservation.available_frame.planner.name}"
-          li = "予約時間: #{reservation.available_frame.scheduled_time.strftime("%Y年 %m月 %d日 (%a) %H:%M")}"
+          li = "予約時間: #{reservation.available_frame.formatted_scheduled_time}"
       .modal-footer
         button.btn.btn-secondary type="button" data-dismiss="modal"
           | キャンセル
