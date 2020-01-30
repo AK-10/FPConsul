@@ -1,0 +1,20 @@
+.container-fluid
+  .row.mt-5.d-flex.align-item-center
+    .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+      .container-fluid
+        .row
+          .col.clearfix
+            = link_to "予約する", clients_available_frames_path,
+                class: "btn btn-primary mb-4 float-right"
+        .row
+          .col
+            .card.md-3
+              h4.card-header = "予約リスト"
+              .card-body
+                .list-group.list-group-flush
+                  - if @reservations.empty?
+                    .list-group-item
+                      .text-center = "予約はありません"
+                  - else
+                    - @reservations.each do |reservation|
+                      = render partial: "shared/reservation_cell", locals: { reservation: reservation }

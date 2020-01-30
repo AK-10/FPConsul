@@ -13,7 +13,7 @@ class PlannersController < ApplicationController
     if @planner.save
       login(@planner)
       flash[:success] = "ユーザー登録が完了しました."
-      redirect_to planner_path(@planner)
+      redirect_to planners_home_path(@planner)
     else
       flash.now[:danger] = @planner.errors.full_messages
       render :new, status: :unprocessable_entity

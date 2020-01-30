@@ -2,22 +2,22 @@
 
 Rails.application.routes.draw do
   scope(path_names: { new: "join" }) do
-    resources :clients, only: %i(new create show edit update)
+    resources :clients, only: %i(new create edit update)
   end
 
   scope(path_names: { new: "join" }) do
-    resources :planners, only: %i(new create show edit update)
+    resources :planners, only: %i(new create edit update)
   end
 
-  resources :planners, only: [] do
+  namespace :planners do
     resources :available_frames, only: %i(index create destroy)
+    resource :home, only: %i(show)
   end
 
-  # /clients/available_framesでのアクセスで/clients/showへのアクセスとみなされる
-  # namespace :clients do
-  resources :clients, module: :clients do
+  namespace :clients do
     resources :available_frames, only: %i(index)
     resources :reservations, only: %i(new create destroy)
+    resource :home, only: %i(show)
   end
 
   scope :user do

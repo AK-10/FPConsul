@@ -1,0 +1,40 @@
+/ reservation: 予約
+/ 使うときはlist-groupクラスでラップする
+.list-group-item.list-group-item-action.flex-column.align-items-start
+  .container
+    .row
+      .col-auto.mr-auto
+        .d-flex.w-100.justify-content-between
+          - if current_user.planner?
+            h5.mb-1 = reservation.client.name
+          - elsif current_user.client?
+            h5.mb-1 = reservation.available_frame.planner.name
+        p.mb-1 = reservation.available_frame.formatted_scheduled_time
+
+      .col-auto
+        - if current_user.client?
+          = button_tag "取り消す",
+              class: "btn btn-danger",
+              type: "button",
+              data: { toggle: "modal", target: "#confirmDestroyModal-#{reservation.id}"}
+
+.modal.fade id="confirmDestroyModal-#{reservation.id}" tabindex=-1
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title 確認
+        button.close data-dismiss='modal' aria-label="キャンセル"
+          span aria-hidden="true"
+            | &times;
+      .modal-body
+        p#activate-frame-confirm-text = "以下の予約を取り消します."
+        ul
+          li = "プランナー: #{reservation.available_frame.planner.name}"
+          li = "予約時間: #{reservation.available_frame.formatted_scheduled_time}"
+      .modal-footer
+        button.btn.btn-secondary type="button" data-dismiss="modal"
+          | キャンセル
+        = button_to "OK",
+            clients_reservation_path(reservation),
+            method: :delete,
+            class: "btn btn-primary"
