@@ -35,6 +35,6 @@
         button.btn.btn-secondary type="button" data-dismiss="modal"
           | キャンセル
         = button_to "OK",
-            clients_reservation_path(reservation.id),
+            clients_reservation_path(reservation),
             method: :delete,
             class: "btn btn-primary"
