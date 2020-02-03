@@ -24,8 +24,11 @@
             - `$ rbenv rehash`
             - 12.14.0がない場合, rbenv, ruby-buildのアップデートを試みてください
 - bundlerのインストール
-    - パッケージ管理にbundlerを用います
+    - gem管理にbundlerを用います
     - `$ gem install bundler`でインストールできます（実行時のrubyのバージョンが2.6.5であることを確認してください）
+- yarnのインストール
+    - nodeパッケージの管理にyarnを用います, homebrewからインストールできます
+    - `$ brew install yarn`
 
 ## setup
 - リポジトリをクローン
@@ -47,3 +50,5 @@
         - username, passwordを正しく変更すると動作します
     - `bundle exec rails db:create`でdbの作成
     - `bundle exec rails db:migrate`でマイグレーションの実行
+
+- 完了
