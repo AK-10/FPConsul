@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root to: "top#show"
+
   scope(path_names: { new: "join" }) do
     resources :clients, only: %i(new create edit update)
   end
