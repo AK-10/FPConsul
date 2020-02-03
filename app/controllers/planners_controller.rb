@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class PlannersController < ApplicationController
+  include SessionConcern
+
+  before_action :redirect_to_home, only: :new
+
   def new
     @planner = Planner.new
   end
@@ -13,7 +17,7 @@ class PlannersController < ApplicationController
     if @planner.save
       login(@planner)
       flash[:success] = "ユーザー登録が完了しました."
-      redirect_to planners_home_path(@planner)
+      redirect_to planners_home_path
     else
       flash.now[:danger] = @planner.errors.full_messages
       render :new, status: :unprocessable_entity

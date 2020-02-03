@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Clients::ReservationsController < ApplicationController
-  before_action :logged_in_as_client?
+  include ClientConcern
+
+  before_action :require_client_login!
   before_action :redirect_unless_datetime_params, only: %i(new)
 
   def new
@@ -18,7 +20,7 @@ class Clients::ReservationsController < ApplicationController
       flash.now[:danger] = reservation.errors.full_messages
     end
 
-    redirect_to clients_available_frames_path(current_client)
+    redirect_to clients_available_frames_path
   end
 
   def destroy
@@ -44,6 +46,6 @@ class Clients::ReservationsController < ApplicationController
       return if params[:datetime]
 
       flash[:danger] = "時間が指定されていません"
-      redirect_to clients_available_frames_path(current_client)
+      redirect_to clients_available_frames_path
     end
 end
