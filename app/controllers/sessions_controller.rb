@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout_user if logged_in?
+    logout if logged_in?
     flash[:info] = "ログアウトしました"
     redirect_to login_path
   end
