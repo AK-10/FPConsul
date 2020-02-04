@@ -17,7 +17,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
             = link_to "Home", current_user.home_path, class: "nav-link"
       .form-inline.my-2.my-lg-0
         - if logged_in?
-          = link_to "ログアウト", login_path,
+          = link_to "ログアウト", logout_path,
               method: :delete,
               class: "btn btn-warning my-2 my-sm-0"
         - else
