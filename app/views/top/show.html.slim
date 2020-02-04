@@ -1,35 +1,24 @@
-.container
-  .row.mt-5
-    .col-lg-12
-      .jumbotron.text-center
-        h1.display-3 = "FPConsul"
-        p.lead = "お金の悩み，解決しませんか？"
+.vh-100.d-flex.align-items-center
+  .container
+    .row
+      .col-lg-12
+        .jumbotron.text-center
+          h1.display-3.text-center = "FPConsul"
+          p.lead = "お金の悩み，解決しませんか？"
 
-  .row
-    .col-lg-6
-      .card
-        .card-body
-          h4.card-title.text-center = "こんな悩みを抱えているあなたへ"
-          ul
-            li = "住宅ローンをなんとかしたい"
-            li = "老後の資金が心配"
-            li = "5000兆円ほしい"
-            li = "脱税をしてしまった"
-          p.text-center = "FPConsulで解決しましょう！"
-          .text-center
-            = link_to "クライアント会員登録", new_client_path,
-                class: "btn btn-primary"
+    .row
+      .col-lg-6.mb-4
+        .card
+          .card-body.min-vh-25
+            h5.card-title.text-center = "相談したい方はこちらから"
+            .text-center
+              = link_to "クライアント会員登録", new_client_path,
+                  class: "btn btn-primary"
 
-    .col-lg-6
-      .card
-        .card-body
-          h4.card-title.text-center = "aaaaa"
-          ul
-            li = "住宅ローンをなんとかしたい"
-            li = "老後の資金が心配"
-            li = "5000兆円ほしい"
-            li = "脱税をしてしまった"
-          p.text-center = "FPConsulで！"
-          .text-center
-            = link_to "プランナー会員登録", new_planner_path,
-                class: "btn btn-primary"
+      .col-lg-6.mb-4
+        .card.min-vh-25
+          .card-body
+            h5.card-title.text-center = "ファナンシャルプランナーの方はこちらから"
+            .text-center
+              = link_to "プランナー会員登録", new_planner_path,
+                  class: "btn btn-primary"
