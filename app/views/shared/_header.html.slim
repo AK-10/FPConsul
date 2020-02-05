@@ -1,6 +1,8 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
   .container-fluid
-    .navbar-brand = "FPConsul"
+    = link_to "FPConsul",
+        logged_in? ? current_user.home_path : root_path,
+        class: "navbar-brand"
     button.navbar-toggler.collapsed[
       type="button"
       data-toggle="collapse"
@@ -17,7 +19,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
             = link_to "Home", current_user.home_path, class: "nav-link"
       .form-inline.my-2.my-lg-0
         - if logged_in?
-          = link_to "ログアウト", login_path,
+          = link_to "ログアウト", logout_path,
               method: :delete,
               class: "btn btn-warning my-2 my-sm-0"
         - else
@@ -28,5 +30,5 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
               = link_to "クライアントとして作成", new_client_path, class: "dropdown-item"
               = link_to "プランナーとして作成", new_planner_path, class: "dropdown-item"
           .nav-item.mr-3
-            = link_to "ログイン", logout_path,
+            = link_to "ログイン", login_path,
               class: "btn btn-warning my-2 my-sm-0"
