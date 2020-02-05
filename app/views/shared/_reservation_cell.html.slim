@@ -11,7 +11,7 @@
             h5.mb-1 = reservation.available_frame.planner.name
         p.mb-1 = reservation.available_frame.formatted_scheduled_time
 
-      .col-auto
+      .col-auto.d-flex.align-items-center
         - if current_user.client?
           = button_tag "取り消す",
               class: "btn btn-danger",
