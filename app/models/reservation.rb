@@ -20,7 +20,7 @@ class Reservation < ApplicationRecord
     end
 
     def verify_available_frame
-      return if available_frame.valid?
-      available_frame.errors.full_messages.each { |err| errors.add(:available_frame, err) }
+      return if available_frame.scheduled_time.future?
+      errors.add(:available_frame, "過去の予約枠は選択できません")
     end
 end
