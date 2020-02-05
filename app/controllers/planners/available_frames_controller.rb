@@ -6,9 +6,12 @@ class Planners::AvailableFramesController < ApplicationController
   before_action :require_planner_login!
 
   def index
-    @from = (params[:from]&.in_time_zone || Time.current).change(hour: 0, min: 0, sec: 0)
-    to = @from.since(7.days)
-    @available_frames = current_planner.available_frames.where(scheduled_time: (@from)..(to))
+    start_time = (params[:from]&.in_time_zone || Time.current) rescue Time.current
+
+    @scheduled_time_from = start_time.beginning_of_day
+    @scheduled_time_to = @scheduled_time_from.since(7.days)
+
+    @available_frames = current_planner.available_frames.where(scheduled_time: (@scheduled_time_from)..(@scheduled_time_to))
   end
 
   def create
