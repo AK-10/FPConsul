@@ -106,7 +106,7 @@ RSpec.describe Clients::ReservationsController, type: :request do
 
       it "is expected to fail because of past available_frame" do
         is_expected.to redirect_to clients_available_frames_path(client)
-        expect(flash[:danger]).to eq(["Available frame Scheduled time can't be past"])
+        expect(flash[:danger]).to eq(["Available frame 過去の予約枠は選択できません"])
       end
     end
   end

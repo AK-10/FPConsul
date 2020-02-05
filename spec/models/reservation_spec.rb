@@ -41,7 +41,7 @@ RSpec.describe Reservation, type: :model do
 
         before { travel 3.days }
 
-        it { expect { subject }.to change { reservation.errors[:available_frame] }.from([]).to(["Scheduled time can't be past"]) }
+        it { expect { subject }.to change { reservation.errors[:available_frame] }.from([]).to(["過去の予約枠は選択できません"]) }
       end
     end
   end
