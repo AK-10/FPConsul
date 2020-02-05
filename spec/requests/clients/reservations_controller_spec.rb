@@ -90,6 +90,25 @@ RSpec.describe Clients::ReservationsController, type: :request do
         expect(flash[:danger]).to eq(["Available frame scheduled_time already exists"])
       end
     end
+
+    context "past available_frame" do
+      let(:planner) { create(:planner) }
+      let!(:available_frame) { create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00") }
+
+      before { travel 3.days }
+      let(:params) do
+        {
+          reservation: {
+            available_frame_id: available_frame.id
+          }
+        }
+      end
+
+      it "is expected to fail because of past available_frame" do
+        is_expected.to redirect_to clients_available_frames_path(client)
+        expect(flash[:danger]).to eq(["Available frame 過去の予約枠は選択できません"])
+      end
+    end
   end
 
   describe "DELETE /clients/reservations/:reservation_id" do

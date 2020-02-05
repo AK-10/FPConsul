@@ -3,10 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Reservation, type: :model do
-  around do |e|
-    travel_to("2019-12-18 12:00:00") { e.run }
-  end
-
+  include_context "travel_to_20191218_noon"
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:client) }
@@ -20,11 +17,12 @@ RSpec.describe Reservation, type: :model do
     context "exist same time validation" do
       subject { reservation.valid? }
 
+      let(:client) { create(:client) }
+      let(:reservation) { build(:reservation, client: client, available_frame: available_frame) }
+
       context "already reserved in the time" do
-        let(:client) { create(:client) }
         let(:available_frame) { create(:available_frame, scheduled_time: "2019-12-19 13:00:00") }
         let(:alt_available_frame) { create(:available_frame, scheduled_time: "2019-12-19 13:00:00") }
-        let(:reservation) { build(:reservation, client: client, available_frame: available_frame) }
 
         before { create(:reservation, client: client, available_frame: alt_available_frame) }
 
@@ -32,11 +30,18 @@ RSpec.describe Reservation, type: :model do
       end
 
       context "have not reserved not yet in the time" do
-        let(:client) { create(:client) }
         let(:available_frame) { create(:available_frame, scheduled_time: "2019-12-19 13:00:00") }
-        let(:reservation) { build(:reservation, client: client, available_frame: available_frame) }
 
         it { expect { subject }.not_to change { reservation.errors[:available_frame] } }
+      end
+
+      context "past available_frame" do
+        let(:planner) { create(:planner) }
+        let!(:available_frame) { create(:available_frame, planner: planner, scheduled_time: "2019-12-18 13:00:00") }
+
+        before { travel 3.days }
+
+        it { expect { subject }.to change { reservation.errors[:available_frame] }.from([]).to(["過去の予約枠は選択できません"]) }
       end
     end
   end
