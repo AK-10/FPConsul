@@ -1,4 +1,11 @@
 .container-fluid
+  .row.mt-4.justify-content-between
+    .col-4
+      = link_to "前の週", clients_available_frames_path(from: @scheduled_time_from-7.day),
+          class: "btn btn-primary"
+    .col-4
+      = link_to "次の週", clients_available_frames_path(from: @scheduled_time_to.since(1.day)),
+          class: "btn btn-primary"
   .row.mt-5.d-flex.align-item-center
     .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
       table.table.table-bordered
