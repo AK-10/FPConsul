@@ -52,6 +52,7 @@ group :test do
 
   gem 'shoulda-matchers'
   gem 'rspec-request_describer'
+  gem 'simplecov'
 end
 
 group :development do
