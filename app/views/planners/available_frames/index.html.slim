@@ -7,10 +7,10 @@
       .container-fluid
         .row.justify-content-between
           .col-4
-            = link_to "前の週", clients_available_frames_path(from: @scheduled_time_from.ago(7.day)),
+            = link_to "前の週", planners_available_frames_path(from: @scheduled_time_from.ago(7.day)),
                 class: "btn btn-primary"
           .col-4.text-right
-            = link_to "次の週", clients_available_frames_path(from: @scheduled_time_to),
+            = link_to "次の週", planners_available_frames_path(from: @scheduled_time_to),
                 class: "btn btn-primary"
 
   .row.mt-5.d-flex.align-item-center
