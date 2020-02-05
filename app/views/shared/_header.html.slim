@@ -1,6 +1,8 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
   .container-fluid
-    .navbar-brand = "FPConsul"
+    = link_to "FPConsul",
+        logged_in? ? current_user.home_path : root_path,
+        class: "navbar-brand"
     button.navbar-toggler.collapsed[
       type="button"
       data-toggle="collapse"
