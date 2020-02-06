@@ -1,8 +1,18 @@
 .container-fluid
-  .row.mt-5.d-flex.align-item-center
+  .row.mt-4.justify-content-between
+    .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+      .container-fluid
+        .row.justify-content-between
+          .col-4
+            = link_to "前の週", clients_available_frames_path(from: @scheduled_time_from.ago(7.day)),
+                class: "btn btn-primary"
+          .col-4.text-right
+            = link_to "次の週", clients_available_frames_path(from: @scheduled_time_to),
+                class: "btn btn-primary"
+  .row.mt-4.d-flex.align-item-center
     .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
       table.table.table-bordered
-        thread
+        thead
           tr
             th scope="col"
               - date_range(@scheduled_time_from.to_date).each do |date|

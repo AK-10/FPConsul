@@ -2,17 +2,28 @@
   = javascript_pack_tag "available_frames/index.js"
 
 .container-fluid
+  .row.mt-4.justify-content-between
+    .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
+      .container-fluid
+        .row.justify-content-between
+          .col-4
+            = link_to "前の週", planners_available_frames_path(from: @scheduled_time_from.ago(7.day)),
+                class: "btn btn-primary"
+          .col-4.text-right
+            = link_to "次の週", planners_available_frames_path(from: @scheduled_time_to),
+                class: "btn btn-primary"
+
   .row.mt-5.d-flex.align-item-center
     .col-sm-12.col-md-8.offset-md-2.col-lg-8.offset-lg-2
       table.table.table-bordered
-        thread
+        thead
           tr
             th scope="col"
-              - date_range(@from.to_date).each do |date|
+              - date_range(@scheduled_time_from.to_date).each do |date|
                 th scope="col"
                   div.text-center = date.strftime("%Y年 %m月 %d日 (%a)")
         tbody
-          - time_table(@available_frames, @from.to_date).each do |range, frames|
+          - time_table(@available_frames, @scheduled_time_from.to_date).each do |range, frames|
             tr
               th
                 .text-center = range
