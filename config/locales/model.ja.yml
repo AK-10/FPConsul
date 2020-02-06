@@ -11,17 +11,21 @@ ja:
           id: ID
           name: 名前
           email: メールアドレス
+          password: パスワード
           created_at: 作成日
           updated_at: 更新日
         available_frame:
           id: ID
-          scheuduled_time: 予定日時
+          scheduled_time: 予定日時
+          planner: プランナー
           planner_id: プランナーID
           created_at: 作成日
           updated_at: 更新日
         reservation:
           id: ID
+          available_frame: 予約枠
           available_frame_id: 予約枠ID
-          client_id: プランナーID
+          client: クライアント
+          client_id: クライアントID
           created_at: 作成日
           updated_at: 更新日
